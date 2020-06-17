@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "CrapriPic",
+      "public": "dist/CrapriPic",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

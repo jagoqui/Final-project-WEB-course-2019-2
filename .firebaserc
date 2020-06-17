@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "access-control-system-jaidiver": {
+      "hosting": {
+        "CrapriPic": [
+          "access-control-system-jaidiver"
+        ]
+      }
+    }
+  }
+}
