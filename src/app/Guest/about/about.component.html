@@ -1,0 +1,100 @@
+<div class="container-flid mt-5 mx-auto">
+    <div class="row">
+        <div class="col-lg-2  md-10 sm-10 ml-5">
+            <p class="lead text-center text-danger">Sobre nosotros</p>
+            <div class="list-group">
+                <a href="contacto">Click me</a>
+                <a href="/" class="list-group-item list-group-item-action active">
+                    ¿Quiénes somos?
+                </a>
+                <a href="#servicios" class="list-group-item list-group-item-action">Servicios
+                </a>
+                <a href="#ubicacion" class="list-group-item list-group-item-action">Ubicación
+
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-8  md-10 sm-10 justify-content-center p-0">
+            <div class="jumbotron">
+                <a name="somos" id="somos"></a>
+                <h1 class="display-7">¡Somos una empresa familiar!</h1>
+                <p class="lead"> dedicada a la producción ovino caprina, Produccion de lacteos de leche de cabra y tambien de experiencias interactivas de picnic.
+                    <br> En la finca Danifer, ofrecemos a nuestros visitantes la oportunidad de tener un espacio natural para compartir, disfrutar en familia y con amigos...
+                </p>
+                <hr class="my-8">
+                <div *ngIf="show">
+                    <div class="lead">
+                        <p>
+                            puedes interactuar con las cabras y ovejas, tener una experiencia granjera que estamos para gener un impacto de conciencia ambiental y cuidado de los aniamles. brindando conocimiento para su alimentación, vacunación y demás cuidados, tambien fomentando
+                            amor y el valor de los trabajadores del campo, enseñando que es un papel fundamental en el desarrollo del mundo.
+                        </p>
+
+                        <p>
+                            Estamos trabajando para brindar a nuestros consumidores, visitantes productos saludables, aprovechando las múltiples características nutricionales que tiene la leche de cabra y la carne de cordero, elaborados con deliciosos sabores naturales y de la mejor
+                            calidad.
+                        </p>
+                    </div>
+                </div>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg " (click)="visibility()" role="button">{{show? 'ocultar' : 'mostrar más'}}</a>
+                </p>
+
+            </div>
+            <div class=" container d-flex col-10 ">
+                <a name="servicios" id="servicios"></a>
+                <div class="card text-white bg-primary mb-5 imgservicios img mr-5">
+                    <div class="card-header">PICNIC</div>
+                    <div class="card ">
+                        <img class="card-img-top " height="150px" width="300px" src="assets/images/img6.jpg">
+                    </div>
+                </div>
+                <div class="card text-white bg-danger mb-5 imgservicios img" style="max-width: 20rem;">
+                    <div class="card-header">RECORRIDO</div>
+                    <div class="card">
+                        <img class="card-img-top " height="150px" width="300px" src="assets/images/img7.jpg">
+                    </div>
+                </div>
+                <div class="card text-white bg-success mb-5 imgservicios img ml-5" style="max-width: 20rem;">
+                    <div class="card-header">INTERACCIÓN</div>
+                    <div class="card ">
+                        <img class="card-img-top" height="150px" width="300px" src="assets/images/img8.jpg">
+                    </div>
+                </div>
+
+            </div>
+            <p class="lead">CapriPic esta ubicado en la finca Danifer, Via San Agustin-Pitalito, <b>para más información
+                    ver
+                    el mapa: </b></p>
+            <div class="media text-center mt-5 p-0 mx-auto">
+                <iframe src=" https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.93474913993!2d-76.08165585011582!3d1.85222947820353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e250de3a23572ef%3A0xecafa3c4dc2a6d24!2sFinca%20familiar%20Danifer!5e0!3m2!1ses!2sco!4v1580271079565!5m2!1ses!2sco "
+                    class="mapa">
+                </iframe>
+            </div>
+            <a name="Contacto" #contacto></a>
+            <h3 class="display-9 card mt-5">Contacto:</h3>
+            <div class="card-header container">
+                <div class="row">
+                    <div class="col">
+                        <p class="lead">Email : caprilac_pitalito@gmail.com</p>
+                        <p class="lead">Contact information: 3178247479</p>
+                        <p class="lead">main social site:
+                            <a href="https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour ">facebook</a></p>
+
+                    </div>
+                    <div class="iconos-sociales img col p-0">
+                        <a href=" https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour " target="_blank "><img alt="¡Síguenos en Facebook! " height="60 " width="60 " src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png
+                     " title="¡Síguenos en Facebook! " /></a>
+                        <i class="fab fa-instagram fa-10x text-info"></i>
+                        <a href="https://www.instagram.com/accounts/login/?hl=es-la " target="_blank "><img alt="¡Síguenos en instagram! " height="60 " width="60 " src="https://4.bp.blogspot.com/-Ilxti1UuUuI/XCrIy6hBAcI/AAAAAAAAH_k/QV5KbuB9p3QB064J08W2v-YRiuslTZnLgCLcBGAs/s1600/instagram.png
+                          " title="¡Síguenos en instagram! " /></a>
+                        <br>
+                        <a href="https://web.whatsapp.com/ " target="_blank "><img alt="¡Síguenos en Facebook! " height="60" width="60 " src="https://2.bp.blogspot.com/-hJd7RLbG6dQ/XCrI389R_CI/AAAAAAAAIA8/2zdJ54oo7GAjqppIbfin0jvgf6cvk3VPgCLcBGAs/s1600/whatsapp.png
+                            " title="¡escribenos en whatsapp! " /></a>
+                        <a href="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fwelcome " target="_blank "><img alt="¡Síguenos en Facebook! " height="60 " width="60 " src="https://2.bp.blogspot.com/-2-EPZRNFYCk/XCrI1fhDOGI/AAAAAAAAIAU/lR5bzE9ACmIKZxTNEetF0-arntQW9Z-AACLcBGAs/s1600/snapchat.png
+                        " title="¡snapchat! " /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

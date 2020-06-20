@@ -1,0 +1,22 @@
+.imgservicios img {
+    transition: all 0.5s ease-out;
+}
+
+.imgservicios img:hover {
+    transform: scale(2);
+}
+
+.iconos-sociales img {
+    transition: all 0.5s ease-out;
+}
+
+.iconos-sociales img:hover {
+    transform: rotate(360deg);
+}
+
+.mapa {
+    width: 700px;
+    height: 300px;
+    border: solid 3px;
+    border-color: palevioletred;
+}
