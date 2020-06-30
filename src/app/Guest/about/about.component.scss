@@ -1,22 +1,24 @@
 .imgservicios img {
     transition: all 0.5s ease-out;
+    max-width: 20rem;
 }
 
 .imgservicios img:hover {
-    transform: scale(2);
-}
-
-.iconos-sociales img {
-    transition: all 0.5s ease-out;
-}
-
-.iconos-sociales img:hover {
-    transform: rotate(360deg);
+    transform: scale(1.2, 1.2);
+    cursor: pointer;
 }
 
 .mapa {
-    width: 700px;
-    height: 300px;
-    border: solid 3px;
-    border-color: palevioletred;
+    border: solid 2px;
+    border-color: rgb(74, 65, 121);
+}
+
+.circle {
+    border-radius: 20%;
+    border: 6px white double;
+    width: 80%;
+}
+
+.circle:hover {
+    filter: sepia(60%);
 }
