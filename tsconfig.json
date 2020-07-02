@@ -2,6 +2,26 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@models/*": [
+        "src/app/shared/models/*"
+      ],
+      "@admin/*": [
+        "src/app/admin/*"
+      ],
+      "@dataBase/*": [
+        "src/app/dataBase/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

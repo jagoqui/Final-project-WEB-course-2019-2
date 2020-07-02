@@ -1,0 +1,18 @@
+<div class="card border-info mb-3 mx-auto mt-5" style="max-width: 20rem;" *ngIf="user$ | async as user">
+  <div class="card-header text-center" >PROFILE</div>
+  <div class="card-body">
+    <div class="row user-details">
+      <div class="col-12">
+        <div class="circle2 mx-auto my-2 text-center">
+          <img id="profileImage" src="{{user.photoURL}}">
+        </div>
+        <h5 class="text-center mt-5">{{user.displayName}}</h5>
+        <h6 class="text-center">
+          {{user.email}}
+        </h6>
+        <hr>
+      </div>
+    </div>
+
+  </div>
+</div>

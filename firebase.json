@@ -30,5 +30,11 @@
         }
       ]
     }
-  ]
+  ],
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "storage": {
+    "rules": "y"
+  }
 }
