@@ -14,11 +14,9 @@ export class StorageService {
   uploadImage(images: FileItem[]) {
     for (const item of images) {
       item.uploading = true;
-
       const filePath = this.generateFileName();
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, item.file);
-
       item.uploadPercent = task.percentageChanges();
       task
         .snapshotChanges()
@@ -31,7 +29,6 @@ export class StorageService {
         .subscribe();
     }
   }
-
   private generateFileName(): string {
     const id = Math.random().toString(36).substring(2);
     return `${this.MEDIA_STORAGE_PATH}/${id}`;
