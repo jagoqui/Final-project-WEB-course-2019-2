@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from '@shared/navbar/navbar.component';
+import { NavbarComponent } from '@shared/Components/navbar/navbar.component';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 
 import { AngularFireAuthModule } from '@angular/fire/auth'
@@ -25,14 +25,14 @@ import { AuthService } from '@auth/services/auth.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    // AngularFireStorageModule
+    AngularFireStorageModule
   ],
   providers: [
     AuthService,
     CanEditGuard,
     CanAdminGuard,
     CanSuscriptorGuard,
-    // { provide: BUCKET, useValue: 'gs://capripic.appspot.com/ '}
+    { provide: BUCKET, useValue: 'gs://capripic.appspot.com/'}
   ],
   bootstrap: [AppComponent]
 })

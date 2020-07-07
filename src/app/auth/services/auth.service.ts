@@ -34,7 +34,7 @@ export class AuthService extends RoleValidator {
       this.updateUserData(user);
       return user;
     } catch (error) {
-      console.log(error);
+      console.log("Error in login with Google :> ",error);
     }
   }
 

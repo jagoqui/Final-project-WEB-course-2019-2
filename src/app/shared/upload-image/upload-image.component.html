@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <div
-          appNgDominicodeFiles
+          appUploadFilesDirective
           [files]="files"
           (mouseOver)="isOverDrop = $event"
           [ngClass]="{ 'file-over': isOverDrop }"
@@ -37,7 +37,7 @@
           <tbody>
             <tr *ngFor="let file of files">
               <td>{{ file.name }}</td>
-              <td>{{ file.file.size / 1024 / 1024 | number: ".2.2" }}MB</td>
+              <td>{{ file.file.size / 1024 / 1024 | number: "1.2-2" }}MB</td>
               <td *ngIf="file.uploadPercent | async as uploadPercent">
                 <div class="progress">
                   <div
@@ -45,7 +45,7 @@
                     role="progessbar"
                     [ngStyle]="{ width: uploadPercent + '%' }"
                   >
-                    {{ uploadPercent | number: "1.0-0" }} %
+                    {{ uploadPercent | number: "1.0-0" }} % <!-- TODO: Esta pasado de 0 a 1-->
                   </div>
                 </div>
               </td>

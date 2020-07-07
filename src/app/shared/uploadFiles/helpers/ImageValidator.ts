@@ -1,4 +1,4 @@
-import { FileItem } from '@shared/upload-image/models/file-item';
+import { FileItem } from '@shared/uploadFiles/models/file-item.ts';
 
 export class ImageValidator {
   private acceptType = ['image/jpeg', 'image/png'];

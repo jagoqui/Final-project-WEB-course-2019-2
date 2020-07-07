@@ -1,25 +1,53 @@
 <div class="row">
-  <div class="col-md-6 mx-auto mt-5">
+  <div class="col-md-4 mx-auto mt-3">
     <div class="card">
       <div class="card-body">
         <h1 class="text-center">REGISTER</h1>
+        <!-- <div *ngIf="(profileImage.uploadPercent | async)==100" class="mx-auto my-2 circle"> <img class="img-fluid img-thumbnail"
+            id="profileImage" [src]="profileImage.downloadURL | async" /> </div> -->
         <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" formControlName="email" />
+          <!-- Name -->
+          <div class="form-group"> <input type="text" class="form-control" formControlName="name"
+              placeholder="Full name" /> </div> <!-- Name errors! -->
+          <div class="alert alert-danger" role="alert"
+            *ngIf="registerForm.get('name').touched && registerForm.get('name').invalid">
+            <div *ngIf="registerForm.get('name').errors.required">Name is required</div>
+            <div *ngIf="registerForm.get('name').errors.minlength">Name must be at least 10 characters</div>
+          </div> <!-- Email -->
+          <div class="form-group"> <input type="email" class="form-control" formControlName="email"
+              placeholder="Email" /> </div> <!-- Email errors! -->
+          <div class="alert alert-danger" role="alert"
+            *ngIf="registerForm.get('email').touched && registerForm.get('email').invalid">
+            <div *ngIf="registerForm.get('email').errors.required">Email is required</div>
+            <div *ngIf="registerForm.get('email').errors.minlength">Email must be at least 15 characters</div>
+            <div *ngIf="registerForm.get('email').errors.pattern">Format email invalid</div>
+          </div> <!-- Password -->
+          <div class="form-group"> <input type="password" class="form-control" formControlName="password"
+              placeholder="Password" /> </div> <!-- Password errors! -->
+          <div class="alert alert-danger" role="alert"
+            *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid">
+            <div *ngIf="registerForm.get('password').errors.required">Password is required</div>
+            <div *ngIf="registerForm.get('password').errors.minlength">Password must be at least 8 characters</div>
+          </div> <!-- Password verification -->
+          <div class="form-group"> <input type="password" class="form-control" formControlName="passwordVerification"
+              placeholder="Enter password again" /> </div> <!-- Password error in match -->
+          <div
+            *ngIf="registerForm.get('passwordVerification').touched && registerForm.get('passwordVerification').value != registerForm.get('password').value">
+            <div class="alert alert-danger" role="alert">Differents passwords</div>
+            <!--TODO:Verificar contraseña!-->
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">
-            Register
-          </button>
+          <hr>
+          <!-- <div class="form-group">
+            <h4 class="text-center">Profile image</h4>
+            <div class="input-group">
+              <div class="custom-file"> <input #imageUser type="file" accept="image/*" class="custom-file-input"
+                  id="inputGroupFile02" (change)="handleImage($event)"> <label class="custom-file-label"
+                  for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose image</label> </div>
+            </div>
+          </div> -->
         </form>
+        <div class="form-group"> <button class="btn btn-success btn-md btn-block mt-3" (click)="onGoogleLogin()"> <i
+              class="fab fa-google" aria-hidden="true"> GOOGLE</i> </button> </div>
         <div class="form-group mt-3">
           <p>Do you have an account?<a [routerLink]="['/login']"> Login </a></p>
         </div>

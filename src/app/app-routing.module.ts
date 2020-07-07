@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('@admin/profile/profile.module').then((m) => m.ProfileModule), canActivate: [CanAdminGuard] },
   { path: 'forgot-password', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   { path: 'upload-image', loadChildren: () => import('@shared/upload-image/upload-image.module').then((m) => m.UploadImageModule), canActivate: [CanAdminGuard] },
-  { path: '**', loadChildren: () => import('@shared/page404/page404.module').then((m) => m.Page404Module) }
+  { path: '**', loadChildren: () => import('@shared/Modules/page404/page404.module').then((m) => m.Page404Module) }
 ];
 
 @NgModule({
