@@ -4,7 +4,7 @@
       <div class="card-body">
         <h1 class="text-center">REGISTER</h1>
         <div *ngIf="imageSrc" class="nav-item circle mx-auto my-3">
-          <img #profileImage id = "profileImage" [src]="imageSrc" (click) = "imageSrc = null"  title="Click for quit">
+          <img #profileImage id="profileImage" [src]="imageSrc" (click)="imageSrc = null" title="Click for quit">
         </div>
         <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
           <!-- Name -->
@@ -42,14 +42,14 @@
             <h4 class="text-center">Profile image</h4>
             <div class="input-group">
               <div class="custom-file">
-                <input #imageUser type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02"
-                  (change)="readURL($event)">
+                <input #imageUser type="file" appUploadFilesDirective [files]="profileImage" (imageSrc)="imageSrc = $event"
+                  class="custom-file-input" id="inputGroupFile02">
                 <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose
                   image</label>
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <!-- <div class="card-body">
             <div
               appUploadFilesDirective
               [files]="files"
@@ -60,11 +60,12 @@
               <h4>Drop here your images</h4>
               <img src="../../../assets/images/cloud.png" alt="drop-images" />
             </div>
-          </div>
-          <button *ngIf="registerForm.valid; else btnDisabled" type="submit"
-            class="btn btn-lg btn-primary btn-block" title="Register new user">Register</button>
+          </div> -->
+          <button *ngIf="registerForm.valid; else btnDisabled" type="submit" class="btn btn-lg btn-primary btn-block"
+            title="Register new user">Register</button>
           <ng-template #btnDisabled>
-            <button type="submit" disabled=true class="btn btn-md btn-secondary btn-block" title="Complete all fields first">Register</button>
+            <button type="submit" disabled=true class="btn btn-md btn-secondary btn-block"
+              title="Complete all fields first">Register</button>
           </ng-template>
         </form>
         <div class="form-group"> <button class="btn btn-success btn-md btn-block mt-3" (click)="onGoogleLogin()"> <i

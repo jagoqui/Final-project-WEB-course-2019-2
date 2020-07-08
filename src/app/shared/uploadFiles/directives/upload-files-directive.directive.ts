@@ -9,6 +9,7 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
   //Comunicación entre el componente que utilice el selector 'appUploadFilesDirective' (ésta directiva)
   @Input() files: FileItem[] = []; //Recibe información de los ficheros cargados
   @Output() mouseOver: EventEmitter<boolean> = new EventEmitter(); //Enviar información de los eventos generados
+  @Output() imageSrc: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
   @HostListener('dragover', ['$event']) //Decorador para 'onDragEnter'
   onDragEnter(event: Event) { //Detecta cuando entra el mouse entró
@@ -32,6 +33,15 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
     this.mouseOver.emit(false); //Emite que se mouse salió
   }
 
+  @HostListener('change', ['$event']) //Decorador para 'onDrop'
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc.emit( reader.result);
+      reader.readAsDataURL(file);
+    }
+  }
   private getDataTransfer(event: any) { //Obtiene la data del fichero transferido si no hay errores
     return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer
   }

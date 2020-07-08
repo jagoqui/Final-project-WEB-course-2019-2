@@ -18,8 +18,7 @@ export class RegisterComponent implements OnInit{
   profileImage: FileItem; //Crea un objeto tipo FileItem para la imagen de perfil del usuario registrado
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //Patrón de validación de email
   registerForm: FormGroup;
-  imageSrc: any;
-  files: FileItem[] = []; //Crea un arreglo de archivos y los setea en null
+  imageSrc: String | ArrayBuffer | null;
   isOverDrop = false;
 
   constructor(private authSvc: AuthService, private router: Router, private readonly storageSvc: StorageService) {}
@@ -34,14 +33,6 @@ export class RegisterComponent implements OnInit{
     });
   }
 
-  readURL(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = e => this.imageSrc = reader.result;
-        reader.readAsDataURL(file);
-    }
-  }
   async onRegister() {
     const { email, password } = this.registerForm.value;
     try {
