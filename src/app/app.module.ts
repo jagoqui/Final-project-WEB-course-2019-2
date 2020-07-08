@@ -18,7 +18,7 @@ import { AuthService } from '@auth/services/auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent,SendEmailComponent
+    AppComponent, NavbarComponent,SendEmailComponent//TODO: Revisar si es necesario importar aquí el SendEmailCompanent
   ],
   imports: [
     BrowserModule,

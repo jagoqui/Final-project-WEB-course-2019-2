@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { UploadImageRoutingModule } from './upload-image-routing.module';
 import { UploadImageComponent } from './upload-image.component';
-import {UploadFilesDirectiveDirective} from '@shared/uploadFiles/directives/upload-files-directive.directive'
+import {SharedModule} from '@shared/SharedModule.module';
 
 @NgModule({
-  declarations: [UploadImageComponent, UploadFilesDirectiveDirective],
+  declarations: [UploadImageComponent],
   imports: [
     CommonModule,
-    UploadImageRoutingModule
+    UploadImageRoutingModule,
+    SharedModule
   ]
 })
 export class UploadImageModule { }

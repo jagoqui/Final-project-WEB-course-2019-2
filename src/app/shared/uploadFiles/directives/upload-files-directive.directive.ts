@@ -58,6 +58,5 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
     event.preventDefault();
     event.stopPropagation();
   }
-
 }
 
