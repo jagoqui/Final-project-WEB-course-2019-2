@@ -36,12 +36,14 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
   @HostListener('change', ['$event']) //Decorador para 'onDrop'
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc.emit( reader.result);
+      this.extractFiles(event.target.files); //Extrae lo ficheros de la tranferencia
+      const file = event.target.files[0]; //Obtine el primer archivo
+      const reader = new FileReader(); //TODO: Posiblemente haya redundancia al crear un archivo, teniendo ya a 'this.files'
+      reader.onload = e => this.imageSrc.emit( reader.result); //Obtine el src del fichero
       reader.readAsDataURL(file);
     }
   }
+
   private getDataTransfer(event: any) { //Obtiene la data del fichero transferido si no hay errores
     return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer
   }
