@@ -23,7 +23,7 @@ export class ItemsDBService {
       }))); // Hace una captura del id y todo los dato de cada item de la coleccón.
   }
 
-  getOneUser(idItem: string): Observable<Item> {
+  getOneItem(idItem: string): Observable<Item> {
     this.ItemDoc = this.afs.doc<Item>(`Items/${idItem}`);
     return this.Item = this.ItemDoc.snapshotChanges().pipe(map(action => {
       if (action.payload.exists === false) {
@@ -36,7 +36,7 @@ export class ItemsDBService {
     }));
   }
 
-  getAllUsers(): Observable<Item[]> { // Devuelvo todos los items almacenados en la BD
+  getAllItems(): Observable<Item[]> { // Devuelvo todos los items almacenados en la BD
     return this.ItemsCollection.snapshotChanges()
       .pipe(
         map(actions =>
@@ -57,7 +57,7 @@ export class ItemsDBService {
     }
   }
 
-  async updateUser(item: Item) {
+  async updateItem(item: Item) {
     const idItem = item.id;
     this.ItemDoc = this.afs.doc<Item>(`Items/${idItem}`);
     try {
@@ -67,8 +67,8 @@ export class ItemsDBService {
     }
   }
 
-  async deleteUser(idItem: string){
-    this.ItemDoc = this.afs.doc<Item>(`Items/${idItem}`);
+  async deleteItem(item: Item){
+    this.ItemDoc = this.afs.doc<Item>(`Items/${item.id}`);
     try {
       return await this.ItemDoc.delete();
     } catch (error) {

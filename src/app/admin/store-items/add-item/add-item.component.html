@@ -1,0 +1,119 @@
+<div class="container">
+  <form [formGroup]="addItemForm" (ngSubmit)="addItem(addItemForm.value)">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="row">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="row">
+          <mat-select placeholder="Category" formControlName="category">
+            <mat-option value="Picnic">Picnic</mat-option>
+            <mat-option value="Senderismo">Senderismo</mat-option>
+            <mat-option value="Granja">Granja</mat-option>
+            <mat-option value="Other">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="row">
+          <input matInput placeholder="Promotional code" formControlName="promotionalCode">
+        </mat-form-field>
+
+        <mat-form-field class="row">
+          <input matInput placeholder="Porcentual descount (0-100)%" formControlName="descount">
+        </mat-form-field>
+
+        <mat-radio-group formControlName="available" class="row">
+          <label>Available: </label>
+          <mat-radio-button value="1" class="mx-2">Yes</mat-radio-button>
+          <mat-radio-button value="0" class="mx-2">No</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field appearance="fill" class="row">
+          <input matInput type="number" class="example-right-align" formControlName="price" min="1">
+          <span matPrefix>$&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-error *ngIf="addItemForm.get('price').invalid">Min price: 1$ COP</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" color="primary" class="row">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" placeholder="Ex. 12" formControlName="quantity" min="1">
+          <span matSuffix>units</span>
+          <mat-error *ngIf="addItemForm.get('quantity').invalid">Min quantity: 1 unit</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" color="primary" class="row">
+          <mat-label>Description</mat-label>
+          <textarea matInput class="form-control" formControlName="description" class="form-control" row="3" cols="120"
+            placeholder="Description..."></textarea>
+          <mat-error *ngIf="addItemForm.get('description').invalid">Min characters: 20</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-6">
+        <div class="row">
+          <div class="col-md-4 mt-5">
+            <div class="card">
+              <div class="card-header">
+                <span>Files</span>
+              </div>
+              <div class="card-body">
+                <div appUploadFilesDirective [files]="itemImages" (mouseOver)="isOverDrop = $event"
+                  [ngClass]="{ 'file-over': isOverDrop }" class="drop-zone">
+                  <h4>Drop here your images</h4>
+                  <img src="../../../assets/images/cloud.png" alt="drop-images" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 mt-5">
+            <div class="card">
+              <div class="card-header">
+                <h4>Files to Upload</h4>
+              </div>
+
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>File name</th>
+                      <th>Size</th>
+                      <th>Progress</th>
+                      <th>URL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let file of itemImages">
+                      <td>{{ file.name }}</td>
+                      <td>{{ file.file.size / 1024 / 1024 | number: "1.2-2" }}MB</td>
+                      <td *ngIf="file.uploadPercent | async as uploadPercent">
+                        <div class="progress">
+                          <div class="progress-bar" role="progessbar" [ngStyle]="{ width: uploadPercent + '%' }">
+                            {{ uploadPercent | number: "1.0-0" }} %
+                          </div>
+                        </div>
+                      </td>
+                      <td *ngIf="file.downloadURL | async as downloadURL">
+                        <a [href]="downloadURL" target="_blank">Download URL</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="container-buttons">
+                  <button (click)="itemImages = []" class="btn btn-danger">Clean all</button>
+                  <button (click)="onUpload()" [disabled]="itemImages.length === 0" class="btn btn-primary">
+                    Upload
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="container-button float-right">
+      <input type="submit" class="btn btn-outline-success" value="Save">
+      <input type="submit" class="btn btn-outline-danger mx-2" value="cancel" [mat-dialog-close]="true">
+    </div>
+  </form>
+</div>
