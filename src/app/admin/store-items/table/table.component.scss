@@ -1,0 +1,61 @@
+table {
+  width: 100%;
+}
+
+//Efecto de hover para hacer el despliegue
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgba(11, 121, 248, 0.2);
+}
+
+
+.example-element-detail {
+  overflow: hidden;
+  display : flex;
+}
+
+.mat-form-field {
+  font-size: 1rem;
+  width: 98%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 1rem;
+}
+
+.container-btn-new {
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Placeholder overrides */
+:host ::ng-deep input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+:host ::ng-deep input:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+:host ::ng-deep input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+:host ::ng-deep input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgba(28, 30, 151, 0.7) !important;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

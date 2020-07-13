@@ -19,7 +19,7 @@ export class AuthService extends RoleValidator {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`Users_loguin/${user.uid}`).valueChanges();
         }
         return of(null);
       })
@@ -34,7 +34,7 @@ export class AuthService extends RoleValidator {
       this.updateUserData(user);
       return user;
     } catch (error) {
-      console.log("Error in login with Google :> ",error);
+      console.log("Error in login with Google :> ", error);
     }
   }
 
@@ -84,11 +84,10 @@ export class AuthService extends RoleValidator {
     }
   }
 
-  private updateUserData(user: User) {
+  public updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
+      `Users_loguin/${user.uid}`
     );
-
     const data: User = {
       uid: user.uid,
       email: user.email,
@@ -97,8 +96,15 @@ export class AuthService extends RoleValidator {
       photoURL: user.photoURL,
       role: 'ADMIN',
     };
-
     return userRef.set(data, { merge: true });
+  }
+
+  public userDelete(email: string) { //TODO: Refactorizar
+    this.afAuth.signInWithEmailAndPassword("user@mail.com", "abcd")
+      .then(function (info) {
+        var user = this.afAuth.auth().currentUser;
+        user.delete();
+      });
   }
 
   isAuth() {

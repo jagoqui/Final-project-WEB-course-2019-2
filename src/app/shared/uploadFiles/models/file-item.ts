@@ -8,4 +8,8 @@ export class FileItem {
   constructor(public file: File = file) { //Le pasa como para
     this.name = file.name;
   }
+
+  get_downloadURL() : any{
+    return this.downloadURL;
+  }
 }
