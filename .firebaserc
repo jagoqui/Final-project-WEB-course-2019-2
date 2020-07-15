@@ -6,6 +6,13 @@
           "access-control-system-jaidiver"
         ]
       }
+    },
+    "capripic": {
+      "hosting": {
+        "CrapriPic": [
+          "capripic"
+        ]
+      }
     }
   },
   "projects": {

@@ -25,7 +25,7 @@ import { ModalComponent } from './../modal/modal.component';
 
 export class TableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['createDate', 'name', 'category', 'quantity', 'available', 'price', 'actions'];
-  titlesContainer: string[] = ['Added','Name', 'Category', 'Quantity', 'Available', 'Price', 'Actions'];
+  titlesContainer: string[] = ['Added', 'Name', 'Category', 'Quantity', 'Available', 'Price', 'Actions'];
   expandedElement: Item | null;
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -33,7 +33,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   constructor(private itemDB: ItemsDBService, public dialog: MatDialog) { }
 
-  onAddItem(){
+  onAddItem() {
     this.openDialog();
   }
 
@@ -63,18 +63,6 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   onUpdateItem(item: Item): void {
-    // SwAlert.fire({
-    //   title: 'Custom width, padding, background.',
-    //   width: 600,
-    //   padding: '3em',
-    //   background: '#fff url(/images/trees.png)',
-    //   backdrop: `
-    //     rgba(0,0,123,0.4)
-    //     url("assets/images/nyan-cat.gif")
-    //     left top
-    //     no-repeat
-    //   `
-    // });
     this.openDialog(item);
   }
 
@@ -87,7 +75,18 @@ export class TableComponent implements OnInit, AfterViewInit {
     };
     const dialogRef = this.dialog.open(ModalComponent, config);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result ${result}`);
+      /* SwAlert.fire({
+        title: 'Custom width, padding, background.',
+        width: 600,
+        padding: '3em',
+        background: '#fff url(/images/trees.png)',
+        backdrop: `
+        rgba(0,0,123,0.4)
+        url("assets/images/nyan-cat.gif")
+        left top
+        no-repeat
+      `
+      }); */
     });
   }
 
