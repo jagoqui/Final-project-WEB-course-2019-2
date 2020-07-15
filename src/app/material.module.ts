@@ -33,6 +33,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatCarouselModule} from '@ngmodule/material-carousel';
 
 const MaterialLibs = [
   MatAutocompleteModule,
@@ -68,6 +69,7 @@ const MaterialLibs = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MatCarouselModule,
 ]
 
 @NgModule({

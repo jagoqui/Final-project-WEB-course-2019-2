@@ -18,6 +18,7 @@ import { AuthService } from '@auth/services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@app/material.module'; //Se importa acá porque posiblemente lo utilice en varios componentes o módulos
 
+
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent,SendEmailComponent //TODO: Revisar si es necesario importar aquí el SendEmailCompanent
@@ -29,7 +30,7 @@ import { MaterialModule } from '@app/material.module'; //Se importa acá porque 
     AngularFireAuthModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
     AuthService,
