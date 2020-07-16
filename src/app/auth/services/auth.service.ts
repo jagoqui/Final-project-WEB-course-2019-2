@@ -85,6 +85,8 @@ export class AuthService extends RoleValidator {
   }
 
   public updateUserData(user: User) {
+    const ADMIN1 = 'jaidiver.gomez@udea.edu.co';
+    const ADMIN2 = 'yenni.hernandez@udea.edu.co'
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `Users_loguin/${user.uid}`
     );
@@ -94,7 +96,7 @@ export class AuthService extends RoleValidator {
       emailVerified: user.emailVerified,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      role: 'ADMIN',
+      role: (user.email == ADMIN1 || user.email == ADMIN2)? 'ADMIN': 'SUSCRIPTOR',
     };
     return userRef.set(data, { merge: true });
   }

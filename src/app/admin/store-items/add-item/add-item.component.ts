@@ -39,6 +39,21 @@ export class AddItemComponent implements OnInit {
   addItem(item: Item) {
   }
 
+  deleteItemImage(pos: number){ //Elimina un fichero del arreglo de ficheros
+    let auxFileItem: FileItem[]=[];
+    let auxImageSrc: any[] = [];
+    for (let i = 0; i < this.itemImages.length; i++) {
+      if(i!=pos){
+        auxFileItem.push(this.itemImages[i]);
+        auxImageSrc.push(this.imagesSrc[i]);
+      }
+    }
+    this.itemImages = [];
+    this.itemImages = [...auxFileItem];
+    this.imagesSrc = [];
+    this.imagesSrc = [...auxImageSrc];
+  }
+
   onUpload(): void {
     this.storageSvc.uploadImage(this.itemImages, 'items');
   }

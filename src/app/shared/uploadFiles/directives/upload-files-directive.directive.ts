@@ -10,7 +10,7 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
   //Comunicación entre el componente que utilice el selector 'appUploadFilesDirective' (ésta directiva)
   @Input() files: FileItem[] = []; //Recibe información de los ficheros cargados
   @Output() mouseOver: EventEmitter<boolean> = new EventEmitter(); //Enviar información de los eventos generados
-  @Output() fileSrc : EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
+  @Output() fileSrc: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
   @HostListener('dragover', ['$event']) //Decorador para 'onDragEnter'
   onDragEnter(event: Event) { //Detecta cuando entra el mouse entró
@@ -36,18 +36,21 @@ export class UploadFilesDirectiveDirective extends ImageValidator {
 
   @HostListener('change', ['$event']) //Decorador para 'onChange'
   private extractFiles(event: any, fileList?: FileList): void { //Extrae los archivos de la lista de archivos cargados (FileList, es un tipo de dato de TS)
-    const filesList_aux = fileList? fileList: event.target.files;
-    for (const property in Object.getOwnPropertyNames(filesList_aux)) {
-      const tempFile = filesList_aux[property];
+    const filesList_aux = fileList ? fileList : event.target.files; //Si la función fue activada por el evento de change, le pasa los ficheros desde el evento, sino si fue activada por onDrop, los pasa desde dataTransfer
+    for (const property in Object.getOwnPropertyNames(filesList_aux)) { //Recorre todos los ficheros
+      const tempFile = filesList_aux[property]; //Obtiene la data de cada fichero
       if (this.canBeUploaded(tempFile)) { //Verifica que la imagenes si cumpla las validaciones
-        const newFile = new FileItem(tempFile);
-        this.files.push(newFile);
-        const file = tempFile; //Obtine todos lo ficheros capturados por el evento
-        const reader = new FileReader(); //TODO: Posiblemente haya redundancia al crear un archivo, teniendo ya a 'this.files'
-        reader.onload = e => this.fileSrc.emit(reader.result); //Obtine el src del fichero
-        reader.readAsDataURL(file); //Asocia cada fichero a un data url
+        const newFile = new FileItem(tempFile); //Crea un nuevo fichero
+        this.files.push(newFile); //Se lo agrega a files
+        this.get_FileSrc(tempFile); //Obtiene el src local de cada fichero cargado
       }
     }
+  }
+
+  get_FileSrc(file: any) { //Obtiene el src de cada fichero cargado
+    const reader = new FileReader(); //TODO: Posiblemente haya redundancia al crear un archivo, teniendo ya a 'this.files'
+    reader.onload = e => this.fileSrc.emit(reader.result); //Obtine el src del fichero
+    reader.readAsDataURL(file); //Asocia cada fichero a un data url
   }
 
   private getDataTransfer(event: any) { //Obtiene la data del fichero transferido si no hay errores

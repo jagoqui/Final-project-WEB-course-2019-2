@@ -12,14 +12,15 @@ const routes: Routes = [
   { path: 'store', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },
   { path: 'about', loadChildren: () => import('./Guest/about/about.module').then(m => m.AboutModule) },
   { path: 'editor', loadChildren: () => import('./editor/editor.module').then((m) => m.EditorModule), canActivate: [CanEditGuard] },
-  { path: 'suscriptor', loadChildren: () => import('./suscriptor/suscriptor.module').then((m) => m.SuscriptorModule), canActivate: [CanSuscriptorGuard] },
+  { path: 'suscriptor', loadChildren: () => import('./suscriptor/suscriptor.module').then((m) => m.SuscriptorModule), canActivate: [CanAdminGuard, CanSuscriptorGuard] }, //TODO: Agregar multiple guards
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
   { path: 'verification-email', component: SendEmailComponent },
-  { path: 'profile', loadChildren: () => import('@admin/profile/profile.module').then((m) => m.ProfileModule), canActivate: [CanAdminGuard] },
+  { path: 'profile', loadChildren: () => import('@admin/profile/profile.module').then((m) => m.ProfileModule), canActivate: [CanAdminGuard, CanSuscriptorGuard] },
   { path: 'forgot-password', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
-  { path: 'upload-image', loadChildren: () => import('@shared/upload-image/upload-image.module').then((m) => m.UploadImageModule), canActivate: [CanAdminGuard] },
-  { path: 'store-items', loadChildren: () => import('./admin/store-items/store-items.module').then(m => m.StoreItemsModule), canActivate: [CanAdminGuard]  },
+  { path: 'store-items', loadChildren: () => import('./admin/store-items/store-items.module').then(m => m.StoreItemsModule), canActivate: [CanAdminGuard] },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [CanAdminGuard] },
+  { path: 'usersList', loadChildren: () => import('./admin/users-list/users-list.module').then(m => m.UsersListModule) },
   { path: '**', loadChildren: () => import('@shared/Modules/page404/page404.module').then((m) => m.Page404Module) }
 ];
 

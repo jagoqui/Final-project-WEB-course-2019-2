@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UploadImageComponent } from './upload-image.component';
+import { UsersListComponent } from './users-list.component';
 
-const routes: Routes = [{ path: '', component: UploadImageComponent }];
+const routes: Routes = [{ path: '', component: UsersListComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UploadImageRoutingModule { }
+export class UsersListRoutingModule { }

@@ -1,16 +1,15 @@
 import { AuthService } from '@auth/services/auth.service';
 import { Injectable } from '@angular/core';
-import {
-  CanActivate
-} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
+import SwAlert from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CanEditGuard implements CanActivate {
-  constructor(private authSvc: AuthService) {}
+  constructor(private authSvc: AuthService, private route: Router) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return this.authSvc.user$.pipe(
@@ -18,7 +17,14 @@ export class CanEditGuard implements CanActivate {
       map((user) => user && this.authSvc.isEditor(user)),
       tap((canEdit) => {
         if (!canEdit) {
-          window.alert('Access denied. Must have permission to edit.');
+          SwAlert.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<span>Access denied. Must have permission to manage data. <span>'
+          }).then((result) => {
+            this.route.navigate(['home/']);
+          })
         }
       })
     );

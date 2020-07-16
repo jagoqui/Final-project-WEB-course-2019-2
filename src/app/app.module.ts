@@ -16,7 +16,7 @@ import { CanAdminGuard } from '@auth/guards/can-admin.guard';
 import { CanEditGuard } from '@auth/guards/can-edit.guard';
 import { AuthService } from '@auth/services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@app/material.module'; //Se importa acá porque posiblemente lo utilice en varios componentes o módulos
+import { MaterialModule } from '@app/material.module';
 
 
 @NgModule({

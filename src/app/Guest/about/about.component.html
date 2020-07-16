@@ -1,161 +1,162 @@
 <div class="container-fluid mt-5 mx-auto">
-    <div class="row">
-        <div class="col-lg-2  md-10 sm-10 ml-5 ">
-            <br>
-            <p class="lead text-center text-danger card border-3">Sobre nosotros</p>
-            <div class="list-group">
-
-                <a href='/somos' class="list-group-item list-group-item-action active">
-          ¿Quiénes somos?
-        </a>
-                <a href="#servicios" class="list-group-item list-group-item-action">Servicios
-        </a>
-                <a href="#ubicacion" class="list-group-item list-group-item-action">Ubicación
-
-        </a>
-            </div>
+  <div class="row">
+    <div class="col-lg-2  md-10 sm-10 ml-5 ">
+      <br>
+      <p class="lead text-center text-danger card border-3">Sobre nosotros</p>
+      <div class="list-group">
+        <a href='/somos' class="list-group-item list-group-item-action active">¿Quiénes somos?</a>
+        <a href="#servicios" class="list-group-item list-group-item-action">Servicios</a>
+        <a href="#ubicacion" class="list-group-item list-group-item-action">Ubicación</a>
+      </div>
+    </div>
+    <div class="col-lg-8  md-16 sm-16  p-0">
+      <div class="jumbotron mt-4">
+        <a name="somos" id="somos1"></a>
+        <h1 class="display-7">¡Somos una empresa familiar!</h1>
+        <p class="lead text-justify"> dedicada a la producción ovino caprina, Produccion de lacteos de leche de cabra y
+          tambien de experiencias interactivas de picnic.
+          <br> En la finca Danifer, ofrecemos a nuestros visitantes la oportunidad de tener un espacio natural para
+          compartir, disfrutar en familia y con amigos...
+        </p>
+        <hr class="my-8">
+        <div *ngIf="show">
+          <div class="lead">
+            <p class="text-justify">
+              puedes interactuar con las cabras y ovejas, tener una experiencia granjera que estamos para gener un
+              impacto de conciencia ambiental y cuidado de los aniamles. brindando conocimiento para su alimentación,
+              vacunación y demás cuidados, tambien fomentando
+              amor y el valor de los trabajadores del campo, enseñando que es un papel fundamental en el desarrollo del
+              mundo.
+            </p>
+            <p class="text-justify">
+              Estamos trabajando para brindar a nuestros consumidores, visitantes productos saludables, aprovechando las
+              múltiples características nutricionales que tiene la leche de cabra y la carne de cordero, elaborados con
+              deliciosos sabores naturales y de la mejor
+              calidad.
+            </p>
+          </div>
         </div>
-        <div class="col-lg-8  md-16 sm-16  p-0">
-            <div class="jumbotron mt-4">
-                <a name="somos" id="somos1"></a>
-                <h1 class="display-7">¡Somos una empresa familiar!</h1>
-                <p class="lead text-justify"> dedicada a la producción ovino caprina, Produccion de lacteos de leche de cabra y tambien de experiencias interactivas de picnic.
-                    <br> En la finca Danifer, ofrecemos a nuestros visitantes la oportunidad de tener un espacio natural para compartir, disfrutar en familia y con amigos...
-                </p>
-                <hr class="my-8">
-                <div *ngIf="show">
-                    <div class="lead">
-                        <p class="text-justify">
-                            puedes interactuar con las cabras y ovejas, tener una experiencia granjera que estamos para gener un impacto de conciencia ambiental y cuidado de los aniamles. brindando conocimiento para su alimentación, vacunación y demás cuidados, tambien fomentando
-                            amor y el valor de los trabajadores del campo, enseñando que es un papel fundamental en el desarrollo del mundo.
-                        </p>
-
-                        <p class="text-justify">
-                            Estamos trabajando para brindar a nuestros consumidores, visitantes productos saludables, aprovechando las múltiples características nutricionales que tiene la leche de cabra y la carne de cordero, elaborados con deliciosos sabores naturales y de la mejor
-                            calidad.
-                        </p>
-                    </div>
-                </div>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg " (click)="visibility()" role="button">{{show? 'ocultar' : 'mostrar más'}}</a>
-                </p>
-
-            </div>
-
-
-
-            <div class=" container d-flex col-10 ">
-                <a name="servicios" id="servicios"></a>
-                <button class="text-white bg-primary mb-5 imgservicios img mr-5" [routerLink]="['/store']">
+        <p class="lead">
+          <a class="btn btn-primary btn-lg " (click)="visibility()"
+            role="button">{{show? 'ocultar' : 'mostrar más'}}</a>
+        </p>
+      </div>
+      <div class=" container d-flex col-10 ">
+        <a name="servicios" id="servicios"></a>
+        <button class="text-white bg-primary mb-5 imgservicios img mr-5" [routerLink]="['/store']">
           <div class="card-header">PICNIC</div>
           <div class="card ">
             <img class="card-img-top " height="150px" width="300px" src="assets/images/img6.jpg">
           </div>
         </button>
-                <button class=" text-white bg-danger mb-5 imgservicios img" [routerLink]="['/store']">
+        <button class=" text-white bg-danger mb-5 imgservicios img" [routerLink]="['/store']">
           <div class=" card-header ">RECORRIDO</div>
           <div class="card ">
             <img class="card-img-top " height="150px " width="300px " src="assets/images/img7.jpg ">
           </div>
         </button>
-                <button class=" text-white bg-success mb-5 imgservicios img ml-5" [routerLink]="['/store']">
+        <button class=" text-white bg-success mb-5 imgservicios img ml-5" [routerLink]="['/store']">
           <div class="card-header ">INTERACCIÓN</div>
           <div class="card ">
             <img class="card-img-top " height="150px " width="300px " src="assets/images/img8.jpg ">
           </div>
         </button>
-
-            </div>
-            <div class="jumbotron mt-4 ">
-                <h3 class="display-7 ">¡Capripic te ofrece!</h3>
-                <p class="lead text-justify"> Contamos con serivicios muy llamativos, principalmente y el más solicitado picnic para ocasiones especiales, con decoración personalizada según el tipo de ocasión. Tambien cuenta con una caminata que implita una aventura de senderismo
-                    realizada por un guia especial, la ultima pero no menos atractiva es la visita a la granja interactiva donde se realiza una charla informativa sobre el cuidado y curiosidades de las cabras y ciertos animales.
-
-                </p>
-
-            </div>
-
-        </div>
+      </div>
+      <div class="jumbotron mt-4 ">
+        <h3 class="display-7 ">¡Capripic te ofrece!</h3>
+        <p class="lead text-justify"> Contamos con serivicios muy llamativos, principalmente y el más solicitado picnic
+          para ocasiones especiales, con decoración personalizada según el tipo de ocasión. Tambien cuenta con una
+          caminata que implita una aventura de senderismo
+          realizada por un guia especial, la ultima pero no menos atractiva es la visita a la granja interactiva donde
+          se realiza una charla informativa sobre el cuidado y curiosidades de las cabras y ciertos animales.
+        </p>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="container-fluid mt-5 lead ">
-    <div class="row ">
-        <div class="col-lg-2 col-sm-3 ">
-            <img class="card-img-top circle " height="150px " width="300px " src="assets/images/pic1.jpg ">
-        </div>
-        <div class="col-lg-4 col-sm-8 ">
-            <h3>¿Por qué un picnic?</h3>
-            <p class="text-justify">Una manera diferente de sorprender a tus amigos, celebrar tus cumpleaños, festejar aniversarios, compartir reuniones de trabajo o simplemente reduce la velocidad diaria y toma un instante para pasar tiempo con la gente que amas.
-            </p>
-        </div>
-        <div class="col-lg-2 col-sm-3 ">
-            <img class="card-img-top circle " height="150px " width="300px " src="assets/images/pic2.jpg ">
-        </div>
-        <div class="col-lg-4 col-sm-8 ">
-            <h3>¡Tú picnic cuando y donde tú quieras!</h3>
-            <p class="text-justify">En el interior o exterior traemos el campo a tu ciudad, organizamos el picnic a tu gusto y de la mejor manera, tambien, En tu casa, en la terraza de tu apartamento, en el jardín o en cualquier parque público preferido, el día y la hora que
-                elijas encontrarás lo necesario para la experiencia y celebración</p>
-        </div>
-
+  <div class="row ">
+    <div class="col-lg-2 col-sm-3 ">
+      <img class="card-img-top circle " height="150px " width="300px " src="assets/images/pic1.jpg ">
     </div>
-
+    <div class="col-lg-4 col-sm-8 ">
+      <h3>¿Por qué un picnic?</h3>
+      <p class="text-justify">Una manera diferente de sorprender a tus amigos, celebrar tus cumpleaños, festejar
+        aniversarios, compartir reuniones de trabajo o simplemente reduce la velocidad diaria y toma un instante para
+        pasar tiempo con la gente que amas.
+      </p>
+    </div>
+    <div class="col-lg-2 col-sm-3 ">
+      <img class="card-img-top circle " height="150px " width="300px " src="assets/images/pic2.jpg ">
+    </div>
+    <div class="col-lg-4 col-sm-8 ">
+      <h3>¡Tú picnic cuando y donde tú quieras!</h3>
+      <p class="text-justify">En el interior o exterior traemos el campo a tu ciudad, organizamos el picnic a tu gusto y
+        de la mejor manera, tambien, En tu casa, en la terraza de tu apartamento, en el jardín o en cualquier parque
+        público preferido, el día y la hora que
+        elijas encontrarás lo necesario para la experiencia y celebración</p>
+    </div>
+  </div>
 </div>
 <div class="container-fluid mt-5 lead ">
-    <div class="row ">
-        <div class="col-lg-2 col-sm-3 ">
-            <img class="card-img-top circle " height="150px " width="300px " src="assets/images/senderismo.jpg ">
-        </div>
-        <div class="col-lg-4 col-sm-8 ">
-            <h3>¿Por qué practicar senderismo?</h3>
-            <p class="text-justify">Además, los beneficios para la salud del senderismo también están presentes para los iniciados. La quema de calorías, el aumento del tono muscular o el mantenimiento de la masa ósea son algunas de las propiedades que tiene para el organismo,
-                como comenta el Dr. Alberto López Rocha, médico de Atención Primaria, quien igualmente subraya que ayuda a controlar la hipertensión, mejora el estado de ánimo y reduce la ansiedad y el estrés.
-            </p>
-        </div>
-        <div class="col-lg-2 col-sm-3 ">
-            <img class="card-img-top circle " height="150px " width="300px " src="assets/images/granja.jpg ">
-        </div>
-        <div class="col-lg-4 col-sm-8 ">
-            <h3>¡la granja escuela como recurso educativo!</h3>
-            <p class="text-justify">Visitar una granja escuela es una ocasión estupenda para que los niños experimenten lo que se conoce como aprendizaje por descubrimiento, que consiste en que conozcan el medio rural y la naturaleza a través del contacto directo con los animales
-                y las plantas. Los pueden tocar, investigar y observar, entendiendo mejor cuál es su comportamiento y su utilidad para el ser humano.</p>
-        </div>
-
+  <div class="row ">
+    <div class="col-lg-2 col-sm-3 ">
+      <img class="card-img-top circle " height="150px " width="300px " src="assets/images/senderismo.jpg ">
     </div>
-
+    <div class="col-lg-4 col-sm-8 ">
+      <h3>¿Por qué practicar senderismo?</h3>
+      <p class="text-justify">Además, los beneficios para la salud del senderismo también están presentes para los
+        iniciados. La quema de calorías, el aumento del tono muscular o el mantenimiento de la masa ósea son algunas de
+        las propiedades que tiene para el organismo,
+        como comenta el Dr. Alberto López Rocha, médico de Atención Primaria, quien igualmente subraya que ayuda a
+        controlar la hipertensión, mejora el estado de ánimo y reduce la ansiedad y el estrés.
+      </p>
+    </div>
+    <div class="col-lg-2 col-sm-3 ">
+      <img class="card-img-top circle " height="150px " width="300px " src="assets/images/granja.jpg ">
+    </div>
+    <div class="col-lg-4 col-sm-8 ">
+      <h3>¡la granja escuela como recurso educativo!</h3>
+      <p class="text-justify">Visitar una granja escuela es una ocasión estupenda para que los niños experimenten lo que
+        se conoce como aprendizaje por descubrimiento, que consiste en que conozcan el medio rural y la naturaleza a
+        través del contacto directo con los animales
+        y las plantas. Los pueden tocar, investigar y observar, entendiendo mejor cuál es su comportamiento y su
+        utilidad para el ser humano.</p>
+    </div>
+  </div>
 </div>
 <div class=" mt-5 p-0 " id="somos ">
-    <p class="lead ">CapriPic esta ubicado en la finca Danifer, Via San Agustin-Pitalito, <b>para más información
-      ver el mapa: </b>
-    </p>
-    <iframe src=" https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.93474913993!2d-76.08165585011582!3d1.85222947820353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e250de3a23572ef%3A0xecafa3c4dc2a6d24!2sFinca%20familiar%20Danifer!5e0!3m2!1ses!2sco!4v1580271079565!5m2!1ses!2sco "
-        class="mapa container-fluid p-0 ">
+  <p class="lead ">CapriPic esta ubicado en la finca Danifer, Via San Agustin-Pitalito, <b>para más información
+    ver el mapa: </b>
+  </p>
+  <iframe
+    src=" https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.93474913993!2d-76.08165585011582!3d1.85222947820353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e250de3a23572ef%3A0xecafa3c4dc2a6d24!2sFinca%20familiar%20Danifer!5e0!3m2!1ses!2sco!4v1580271079565!5m2!1ses!2sco "
+    class="mapa container-fluid p-0 ">
   </iframe>
 </div>
 <div class="container-fluid border card-header ">
-    <a name="Contacto " #contacto></a>
-    <h3 class=" container-fluid display-9 mx-5 ">Contacto</h3>
-
-    <div class="row ">
-        <div class="col ">
-            <p class="lead mx-5 ">Email : caprilac_pitalito@gmail.com</p>
-            <p class="lead mx-5 ">Contact information: 3178247479</p>
-            <p class="lead mx-5 ">main social site:
-                <a href="https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour ">facebook</a></p>
-
-        </div>
-        <div class="iconos-sociales i col p-0 ">
-            <a href=" https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour " target="_blank "><i
+  <a name="Contacto " #contacto></a>
+  <h3 class=" container-fluid display-9 mx-5 ">Contacto</h3>
+  <div class="row ">
+    <div class="col ">
+      <p class="lead mx-5 ">Email : caprilac_pitalito@gmail.com</p>
+      <p class="lead mx-5 ">Contact information: 3178247479</p>
+      <p class="lead mx-5 ">main social site:
+        <a href="https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour ">facebook</a></p>
+    </div>
+    <div class="iconos-sociales i col p-0 ">
+      <a href=" https://www.facebook.com/CaprilacPitalito/?modal=admin_todo_tour " target="_blank "><i
           class="fab fa-facebook fa-4x text-info mx-2 " alt="¡Síguenos en facebook! "
           title="¡siguenos en Facebook! "></i></a>
-            <a href="https://www.instagram.com/accounts/login/?hl=es-la " target="_blank "><i
+      <a href="https://www.instagram.com/accounts/login/?hl=es-la " target="_blank "><i
           class="fab fa-instagram fa-4x text-info mx-2 " alt="¡Síguenos en instagram! "
           title="¡Síguenos en instagram! "></i></a>
-            <a href="https://web.whatsapp.com/ " target="_blank "><i class="fab fa-whatsapp fa-4x text-info mx-2 "
+      <a href="https://web.whatsapp.com/ " target="_blank "><i class="fab fa-whatsapp fa-4x text-info mx-2 "
           alt="¡Síguenos en Facebook! " title="¡escribenos en whatsapp! "></i></a>
-            <a href="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fwelcome " target="_blank "><i class="fab fa-snapchat fa-4x text-info mx-2 " alt="¡Síguenos en snapchat! "
+      <a href="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fwelcome "
+        target="_blank "><i class="fab fa-snapchat fa-4x text-info mx-2 " alt="¡Síguenos en snapchat! "
           title="¡snapchat! "></i></a>
-        </div>
     </div>
-
+  </div>
 </div>
