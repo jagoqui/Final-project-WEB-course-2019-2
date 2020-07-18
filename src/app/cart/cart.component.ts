@@ -14,7 +14,7 @@ import { User } from '@shared/models/user.interface';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  public CartsUser$: Observable<Cart[]>
+  public CartsUser: Cart[]
   user: User = {
     uid: null,
     email: null,
@@ -24,15 +24,12 @@ export class CartComponent implements OnInit {
   constructor(private itemDB: ItemsDBService, private autSvc: AuthService, private cartDB: CartDbService, private router: Router) { }
 
   ngOnInit(): void {
-    // this.autSvc.isAuth().subscribe(user  => this.user = user);
-    // this.cartDB.getAllCarts().subscribe(Carts => {
-    //   for  (const cart of Carts) {
-    //     if(cart.userId == this.user.uid){
-    //       this.user.cartId.push(cart.id);
-    //       this.CartsUser$.push(this.cartDB.getOneCart(cart.id));
-    //     }
-    //   }
-    // })
+    this.autSvc.isAuth().subscribe(user  => this.user = user);
+    for  (const cartsId of this.user.cartId) {
+      this.cartDB.getOneCart(cartsId).subscribe(cart => this.CartsUser.push(cart));
+    }
+    console.log(this.CartsUser);
+
   }
 
 }

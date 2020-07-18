@@ -6,6 +6,7 @@ import { ItemsDBService } from '@admin/services/items-db.service';
 import { Item } from '@admin/models/item.interface'
 import { Cart } from '../cart/models/cart.interface';
 import { CartDbService } from '../cart/services/cart-db.service'
+import { User } from '@shared/models/user.interface';
 
 @Component({
   selector: 'app-store',
@@ -16,7 +17,12 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   public Items$: Observable<Item[]>
   numItemsCart: number = 0;
-
+  user: User = {
+    uid: null,
+    email: null,
+    emailVerified: null,
+    cartId: null,
+  }
   cart: Cart = {
     userId: '',
     itemsId: [],
@@ -38,6 +44,7 @@ export class StoreComponent implements OnInit, OnDestroy {
           this.cart.numItem = this.numItemsCart;
           this.numItemsCart++;
           this.cartDB.onCart$.emit(this.numItemsCart);
+          this.user = user;
         } else {
           this.router.navigate(['/login']);
         }
@@ -67,7 +74,9 @@ export class StoreComponent implements OnInit, OnDestroy {
           this.cart.totalPay = this.cart.totalPay + item.price;
         });
       }
-      console.log(this.cartDB.addCart(this.cart));
+      const docRefId = this.cartDB.addCart(this.cart);
+      docRefId.then(res => this.user.cartId.push(res));
+      this.autSvc.updateUserData(this.user);
     }
   }
 }

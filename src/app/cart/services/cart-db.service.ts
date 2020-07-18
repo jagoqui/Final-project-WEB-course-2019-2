@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Cart } from '../models/cart.interface'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; // Para hacer mapeo entre valores
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,8 @@ export class CartDbService {
 
   async addCart(newItem: Cart) {
     try {
-      return await this.CartsCollection.add(newItem);
+      const docRef =  await this.CartsCollection.add(newItem);
+      return docRef.id;
     } catch (error) {
       console.log("Error in add new cart :> ", error);
     }

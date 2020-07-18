@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row">
-    <div *ngFor="let item of Items$ | async" class="col-3">
+    <div *ngFor="let item of Items$ | async" class="col-3 mt-3">
       <div class="card p-4">
         <mat-card-title class="text-center">{{item.name | uppercase}}</mat-card-title>
         <mat-card-subtitle class="text-center text-white my-1">{{item.category}}</mat-card-subtitle>
@@ -13,7 +13,10 @@
           </mat-carousel-slide>
         </mat-carousel>
         <div class="card-body">
-          <p class="card-text">{{item.description}}</p>
+          <textarea class="form-control" formControlName="description" class="form-control" row="3" cols="150"
+           placeholder="Description...">
+            {{item.description}}
+          </textarea>
         </div>
         <mat-card-footer>
           <span>{{item.price}}$</span>

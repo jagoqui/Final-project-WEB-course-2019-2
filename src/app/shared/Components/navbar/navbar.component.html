@@ -17,7 +17,7 @@
         <a class="nav-link" [routerLink]="['/store']"><i class="fas fa-store fa-2x "></i>Store</a>
       </li>
       <li *ngIf="user$ | async as user" class="nav-item">
-        <a  *ngIf="(user.email == 'jaidiver.gomez@udea.edu.co') || (user.email == 'yenni.hernandez@udea.edu.co')" class="nav-link" [routerLink]="['/admin']" title="ADMIN"><i class="fas fa-user-cog fa-2x "></i>ADMIN</a>
+        <a  *ngIf="(user.email == 'jaidiver.gomez@udea.edu.co') || (user.email == 'yeni.hernandez@udea.edu.co')" class="nav-link" [routerLink]="['/admin']" title="ADMIN"><i class="fas fa-user-cog fa-2x "></i>ADMIN</a>
       </li> <!-- TODO: Verificar el usuario logueado-->
     </ul>
     <ul class="navbar-nav float-right" *ngIf="user$ | async as user; else login">
