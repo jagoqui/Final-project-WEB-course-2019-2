@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../../admin/models/item.interface'
+import { Item } from '@admin/models/item.interface'
 import { Observable } from 'rxjs';
-import { map, finalize } from 'rxjs/operators'; // Para hacer mapeo entre valores
+import { map} from 'rxjs/operators'; // Para hacer mapeo entre valores
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({

@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   imageSrc: String | ArrayBuffer | null;
   isOverDrop = false;
-
+  newUser: User;
   constructor(private authSvc: AuthService, private router: Router, private storageSvc: StorageService) { }
 
   createFormGroup() {
@@ -32,16 +32,15 @@ export class RegisterComponent implements OnInit {
   }
 
   async onRegister() {
-    const { email, password, profileImageURL } = this.registerForm.value;
+    const { email, password } = this.registerForm.value;
     try {
-      const user = await this.authSvc.register(email, password);
-      if (user) {
+      this.newUser = await this.authSvc.register(email, password);
+      if (this.newUser) {
         // this.storageSvc.uploadImage(this.profileImage, 'test');
-        // while (!this.profileImage[0].uploading);//TODO: No puedo acceder al link de la imagen
         // console.log(this.profileImage[0].get_downloadURL());
-        // this.profileImage[0].downloadURL.subscribe(url => user.photoURL);
-        // this.authSvc.updateUserData(user); //Actualiza la información del usuario
-        this.checkUserIsVerified(user);
+        // this.profileImage[0].downloadURL.subscribe(url => this.newUser.photoURL = url);
+        // this.authSvc.updateUserData(this.newUser); //Actualiza la información del usuario
+        this.checkUserIsVerified(this.newUser);
       } else {
         this.profileImage = []; //Elimina la imagen de perfil cargada
         this.imageSrc = null; //Le lleva nul al src del la imagen cargada, para que obligue al usuario volver a cargar una imagen

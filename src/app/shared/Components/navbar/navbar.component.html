@@ -24,12 +24,10 @@
       <li class="nav-item circle">
         <img id="profileImage" src="{{user?.photoURL}}" routerLink="/profile">
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">{{ user?.displayName }}</a>
-      </li>
       <li class="nav-item" *ngIf="user">
         <a href="#" class="nav-link ml-2" (click)="onLogout()">Logout</a>
       </li>
+      <a [routerLink]= "['/cart']" class="text-danger"><i *ngIf="(cartBD.onCart$ | async) != null" class="fas fa-cart-plus fa-2x"></i>{{cartBD.onCart$ | async}}</a>
     </ul>
 
     <ng-template #login>

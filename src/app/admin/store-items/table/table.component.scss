@@ -4,7 +4,7 @@ table {
 
 //Efecto de hover para hacer el despliegue
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: rgba(11, 121, 248, 0.2);
+  background: rgba(12, 97, 194, 0.568);
 }
 
 
@@ -55,7 +55,3 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}

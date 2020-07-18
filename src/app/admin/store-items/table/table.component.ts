@@ -54,9 +54,17 @@ export class TableComponent implements OnInit, AfterViewInit {
     }).then(result => {
       if (result.value) {
         this.itemDB.deleteItem(item).then(() => {
-          SwAlert.fire('Deleted!', 'Your  post has been deleted.', 'success');
+          SwAlert.fire(
+            {
+              icon: 'success',
+              title: 'Deleted!',
+              text: 'Your  item has been deleted.',
+              showConfirmButton: false,
+              timer: 1500
+            }
+          )
         }).catch((error) => {
-          SwAlert.fire('Error!', 'There was an error deleting this post', 'error');
+          SwAlert.fire('Error!', 'There was an error deleting this item', error);
         });
       }
     });
@@ -71,23 +79,13 @@ export class TableComponent implements OnInit, AfterViewInit {
       data: {
         action: item ? 'UPDATE' : 'ADD',
         content: item
-      }
+      },
+      height: 'auto',
+      width: '900px',
+      disableClose : true,
+      autoFocus : true,
     };
     const dialogRef = this.dialog.open(ModalComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
-      /* SwAlert.fire({
-        title: 'Custom width, padding, background.',
-        width: 600,
-        padding: '3em',
-        background: '#fff url(/images/trees.png)',
-        backdrop: `
-        rgba(0,0,123,0.4)
-        url("assets/images/nyan-cat.gif")
-        left top
-        no-repeat
-      `
-      }); */
-    });
   }
 
   ngOnInit(): void {

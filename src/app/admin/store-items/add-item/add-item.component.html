@@ -1,60 +1,66 @@
-<div class="container">
+<form [formGroup]="addItemForm">
   <div class="row">
-    <div class="col-4">
-      <form [formGroup]="addItemForm" (ngSubmit)="addItem(addItemForm.value)" class="p-0">
-        <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name">
-        </mat-form-field><br>
-
-        <mat-form-field>
-          <mat-select placeholder="Category" formControlName="category">
-            <mat-option value="Picnic">Picnic</mat-option>
-            <mat-option value="Senderismo">Senderismo</mat-option>
-            <mat-option value="Granja">Granja</mat-option>
-            <mat-option value="Other">Other</mat-option>
-          </mat-select>
-        </mat-form-field><br>
-
-        <mat-form-field>
-          <input matInput placeholder="Promotional code" formControlName="promotionalCode">
-        </mat-form-field><br>
-
-        <mat-form-field>
-          <input matInput placeholder="Porcentual descount (0-100)%" formControlName="discount">
-        </mat-form-field><br>
-
-        <mat-radio-group formControlName="available">
-          <label>Available: </label>
-          <mat-radio-button value="1" class="mx-2">Yes</mat-radio-button>
-          <mat-radio-button value="0" class="mx-2">No</mat-radio-button>
-        </mat-radio-group><br>
-
-        <mat-form-field appearance="fill">
-          <input matInput type="number" class="example-right-align" formControlName="price" min="1">
-          <span matPrefix>$&nbsp;</span>
-          <span matSuffix>.00</span>
-          <mat-error *ngIf="addItemForm.get('price').invalid">Min price: 1$ COP</mat-error>
-        </mat-form-field><br>
-
-        <mat-form-field appearance="fill" color="primary">
-          <mat-label>Quantity</mat-label>
-          <input matInput type="number" placeholder="Ex. 12" formControlName="quantity" min="1">
-          <span matSuffix>units</span>
-          <mat-error *ngIf="addItemForm.get('quantity').invalid">Min quantity: 1 unit</mat-error>
-        </mat-form-field><br>
-
-        <mat-form-field appearance="fill" color="primary">
-          <mat-label>Description</mat-label>
-          <textarea matInput class="form-control" formControlName="description" class="form-control" row="3" cols="120"
-            placeholder="Description..."></textarea>
-          <mat-error *ngIf="addItemForm.get('description').invalid">Min characters: 20</mat-error>
-        </mat-form-field><br>
-      </form>
+    <div class="col-5">
+      <!-- Name -->
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="addItemForm.get('name').invalid">Required field</mat-error>
+      </mat-form-field><br>
+      <!-- Category -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-select placeholder="Category" formControlName="category">
+          <mat-option value="Picnic">Picnic</mat-option>
+          <mat-option value="Senderismo">Senderismo</mat-option>
+          <mat-option value="Granja">Granja</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="addItemForm.get('category').invalid">Required field</mat-error>
+      </mat-form-field><br>
+      <!-- Promotional code -->
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput placeholder="Promotional code" formControlName="promotionalCode">
+        <mat-error *ngIf="addItemForm.get('promotionalCode').invalid">The field must have 10 characters
+        </mat-error>
+      </mat-form-field><br>
+      <!-- Discount -->
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput placeholder="Porcentual descount (0-100)%" formControlName="discount">
+        <mat-error *ngIf="addItemForm.get('discount').invalid">Enter only percentage values</mat-error>
+      </mat-form-field><br>
+      <!-- Available -->
+      <mat-radio-group appearance="fill" class="w-100" formControlName="available">
+        <label>Available: </label><br>
+        <mat-radio-button value="1" class="mx-2">Yes</mat-radio-button>
+        <mat-radio-button value="0" class="mx-2">No</mat-radio-button>
+        <mat-error *ngIf="addItemForm.get('available').invalid">Required field</mat-error>
+      </mat-radio-group><br>
+      <!-- Price -->
+      <mat-form-field appearance="fill" class="w-100">
+        <input matInput type="number" class="example-right-align" formControlName="price" min="1">
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+        <mat-error *ngIf="addItemForm.get('price').invalid">Min price: 1$ COP</mat-error>
+      </mat-form-field><br>
+      <!-- Quantity -->
+      <mat-form-field appearance="fill" color="primary" class="w-100">
+        <mat-label>Available units</mat-label>
+        <input matInput type="number" placeholder="Ex. 12" formControlName="quantity" min="0">
+        <span matSuffix>units</span>
+        <mat-error *ngIf="addItemForm.get('quantity').invalid">Invalid data</mat-error>
+      </mat-form-field><br>
+      <!-- Description -->
+      <mat-form-field appearance="fill" color="primary" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput class="form-control" formControlName="description" class="form-control" row="3" cols="120"
+          placeholder="Description..."></textarea>
+        <mat-error *ngIf="addItemForm.get('description').invalid">Min characters: 10</mat-error>
+      </mat-form-field><br>
     </div>
-    <div class="col ml-5">
+    <div class="col-7 w-100">
+      <!-- Carrousel -->
       <mat-carousel *ngIf="imagesSrc" timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent"
         maxWidth="auto" proportion="40" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="false"
-        [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+        [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr" class="row">
         <mat-carousel-slide #matCarouselSlide *ngFor="let imageSrc of imagesSrc; let i = index" [image]="imageSrc"
           overlayColor="#00000040" [hideOverlay]="false">
           <div *ngFor="let item of itemImages; let j=index" style="background-color: rgba(31, 33, 36, 0.4);">
@@ -68,15 +74,18 @@
           </div>
         </mat-carousel-slide>
       </mat-carousel>
+      <!-- Upload files items -->
       <div class="row mt-2">
-        <div class="card">
+        <div class="card p-0">
           <div class="card-header">
             <span class="text-white">Item images</span>
           </div>
           <div class="card-body">
             <div #imageUser appUploadFilesDirective [files]="itemImages" (mouseOver)="isOverDrop = $event"
-              (fileSrc)="imagesSrc.push( $event) " [ngClass]="{ 'file-over': isOverDrop }"
+              (fileSrc)=" imagesSrc.push( $event) " [ngClass]="{ 'file-over': isOverDrop }"
               class="drop-zone p-3 text-center">
+              <!-- itemImages.push({'fileSrc' : $event}) -->
+              <!-- imagesSrc.push( $event) -->
               <h4 class="text-white">Drop here your images</h4>
               <img src="assets/images/cloud.png" alt="drop-images" class="text-center" />
             </div>
@@ -112,21 +121,18 @@
                     <a [href]="downloadURL" target="_blank">
                       <mat-icon class="mat-18">zoom_out_map</mat-icon>
                     </a>
+                    {{getImagesURL(downloadURL)}}
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <div class="card-footer">
+            <button (click)="deleteItemImage(null, itemImages)" class="btn btn-danger float-right mx-2">Clean all</button>
+            <button (click)="onUpload()" class="btn btn-success float-right">Upload</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-button float-right">
-    <input type="submit" class="btn btn-outline-success" value="Save">
-    <input type="submit" class="btn btn-outline-danger mx-2" value="cancel" [mat-dialog-close]="true">
-    <button (click)="itemImages = []" class="btn btn-danger">Clean all</button>
-    <button (click)="onUpload()" [disabled]="itemImages.length === 0" class="btn btn-primary">
-      Upload
-    </button>
-  </div>
-</div>
+</form>

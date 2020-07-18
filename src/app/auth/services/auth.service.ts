@@ -7,15 +7,20 @@ import { switchMap, map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
+  AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { RoleValidator } from '@auth/helpers/roleValidator';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends RoleValidator {
+  private UsersCollection: AngularFirestoreCollection<User>; // Le paso los users que hay en Firenbase
+  Users: Observable<User[]>; // Observo los user
+  private UserDoc: AngularFirestoreDocument<User>; // Le paso los un user desde Firenbase
   public user$: Observable<User>;
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     super();
+    this.UsersCollection = afs.collection<User>('Users_loguin'); // Le paso a la colección de la app la colección almacena en la BD
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -84,6 +89,32 @@ export class AuthService extends RoleValidator {
     }
   }
 
+  getOneUser(idUser: string): Observable<User> {
+    this.UserDoc = this.afs.doc<User>(`Users_loguin/${idUser}`);
+    return this.user$ = this.UserDoc.snapshotChanges().pipe(map(action => {
+      if (action.payload.exists === false) {
+        return null;
+      } else {
+        const User = action.payload.data() as User;
+        User.uid = action.payload.id;
+        return User;
+      }
+    }));
+  }
+
+  getAllUsers(): Observable<User[]> { // Devuelvo todos los items almacenados en la BD
+    return this.UsersCollection.snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as User;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+  }
+
   public updateUserData(user: User) {
     const ADMIN1 = 'jaidiver.gomez@udea.edu.co';
     const ADMIN2 = 'yenni.hernandez@udea.edu.co'
@@ -96,17 +127,27 @@ export class AuthService extends RoleValidator {
       emailVerified: user.emailVerified,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      role: (user.email == ADMIN1 || user.email == ADMIN2)? 'ADMIN': 'SUSCRIPTOR',
+      role: (user.email == ADMIN1 || user.email == ADMIN2) ? 'ADMIN' : 'SUSCRIPTOR',
     };
     return userRef.set(data, { merge: true });
   }
 
-  public userDelete(email: string) { //TODO: Refactorizar
-    this.afAuth.signInWithEmailAndPassword("user@mail.com", "abcd")
-      .then(function (info) {
-        var user = this.afAuth.auth().currentUser;
-        user.delete();
-      });
+  async userDelete(user: User) { //TODO: Refactorizar
+    this.UserDoc = this.afs.doc<User>(`Users_loguin/${user.uid}`);
+    try {
+      // if (user.password) {
+      //   this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+      //     .then(function (info) {
+      //       var user = this.afAuth.auth().currentUser;
+      //       user.delete();
+      //     });
+      // }else{
+
+      // }
+      return await this.UserDoc.delete();
+    } catch (error) {
+      console.log("Error deleting item :> ", error);
+    }
   }
 
   isAuth() {

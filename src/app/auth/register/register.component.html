@@ -49,6 +49,9 @@
               </div>
             </div>
           </div>
+          <div *ngIf="newUser?.photoURL | async as url">
+            <a [href]="url" target="_blank">{{url}}</a>
+          </div>
           <button *ngIf="registerForm.valid && imageSrc; else btnDisabled" type="submit" class="btn btn-lg btn-primary btn-block"
             title="Register new user">Register</button>
           <ng-template #btnDisabled>

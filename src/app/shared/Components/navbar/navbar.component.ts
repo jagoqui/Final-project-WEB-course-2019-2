@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '@auth/services/auth.service';
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { CartDbService } from '@app/cart/services/cart-db.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent{
   public user$: Observable<User>;
 
-  constructor(public authSvc: AuthService, private router: Router) {
+  constructor(public authSvc: AuthService, public cartBD: CartDbService, private router: Router) {
     try {
       this.user$ = this.authSvc.isAuth();
     } catch (error) {

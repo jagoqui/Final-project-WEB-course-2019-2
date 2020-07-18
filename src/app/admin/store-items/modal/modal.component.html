@@ -1,6 +1,14 @@
-<div class="container p-0">
-    <h1 class="text-center">{{data.action}}</h1>
-    <mat-dialog-content class="dialog-content">
-      <app-add-item [item] = "data.content"></app-add-item>
-    </mat-dialog-content>
-</div>
+<mat-dialog-content class="dialog-content">
+  <h1 class="text-center">{{data.action}}</h1>
+  {{data.content?.id}}
+  <app-add-item #addItem [itemUpdate]="data.content" [action]="data.action" (closeModal)="onCloseEventReceived = $event"></app-add-item>
+  {{onClose(onCloseEventReceived)}}
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <button *ngIf="addItem.addItemForm.valid && addItem.uploadingFilesFinish; else btnDisabled" class="btn btn-success"
+    title="Save item" (click)="addItem.onAddItem()">Save</button>
+  <ng-template #btnDisabled>
+    <button type="submit" class="btn btn-secondary" title="Complete all fields first" disabled=true>Save</button>
+  </ng-template>
+  <button class="btn btn-danger mx-2" (click)="isClose()">Close</button>
+</mat-dialog-actions>

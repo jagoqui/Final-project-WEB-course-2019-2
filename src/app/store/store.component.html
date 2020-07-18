@@ -1,3 +1,31 @@
+<div class="container mt-5">
+  <div class="row">
+    <div *ngFor="let item of Items$ | async" class="col-3">
+      <div class="card p-4">
+        <mat-card-title class="text-center">{{item.name | uppercase}}</mat-card-title>
+        <mat-card-subtitle class="text-center text-white my-1">{{item.category}}</mat-card-subtitle>
+        <!-- Carrousel -->
+        <mat-carousel *ngIf="item.photosURL" timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent"
+          maxWidth="250px" proportion="100" slides="5" [loop]="true" [hideArrows]="true" [hideIndicators]="true"
+          [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr" class="row">
+          <mat-carousel-slide #matCarouselSlide *ngFor="let imageSrc of item.photosURL; let i = index"
+            [image]="imageSrc" overlayColor="#00000040" [hideOverlay]="false">
+          </mat-carousel-slide>
+        </mat-carousel>
+        <div class="card-body">
+          <p class="card-text">{{item.description}}</p>
+        </div>
+        <mat-card-footer>
+          <span>{{item.price}}$</span>
+          <button  mat-raised-button class="btn btn-success float-right" (click)="onAddCart(item)">
+            <i class="fa fa-cart-plus fa-2x text-danger" aria-hidden="true"></i>
+          </button>
+        </mat-card-footer>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
     <div class="container mt-5">
         <div class="container mt-5">
@@ -22,18 +50,18 @@
                         <td> <img class="card-img-top " width="auto" src="assets/images/store1.jpg"></td>
                         <td>
                             Vonshef Deluxe 2 Person Cesta De Picnic Mimbre <br> EL TIEMPO DE ENTREGA ES DE 12 A 20 DIAS HABILES DESCRIPCION DEL PRODUCTO, Incluye 2 cuchillos de acero inoxidable x, 2 x tenedores de acero inoxidable, 2 x cucharas de acero
-                            ... <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            ... <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$93.533</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store2.jpg"></td>
                         <td>Canasta De Picnic Vimoria, Cesta De Picnic<br> Medidas: largo 44 cm, alto 24 cm, ancho 29cm. Incluye: 4 platos en melamina de 20 cm diámetro, 4 servilletas en tela, 1 destapador de dos tiempos, 4 copas en vidrio para vino, ...
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 139.990</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store3.jpg"></td>
-                        <td>Mantel tipo picnic en color a elección. Incluye envío Mantel de cuadros 4 puestos Medidas: 145 x 145 cmMaterial: tela lino<br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                        <td>Mantel tipo picnic en color a elección. Incluye envío Mantel de cuadros 4 puestos Medidas: 145 x 145 cmMaterial: tela lino<br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$54.500</td>
                     </tr>
 
@@ -61,19 +89,19 @@
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store4.jpg"></td>
                         <td>Mochila De Senderismo De Marco Interno De 50l70l En La Cima <br> EL TIEMPO DE ENTREGA ES DE 12 A 20 DIAS HABILES, hay en los tres colores que se muestran en la imagen, no incluye termo.
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 339.990</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store5.jpg"></td>
                         <td>Bastones De Trekking Para Senderismo, Paquete De Plega...
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 139.990</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store6.jpg"></td>
                         <td>Bota De Senderismo Impermeable Columbia Ridge Plus.
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 139.990</td>
                     </tr>
 
@@ -100,20 +128,20 @@
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store7.jpg"></td>
                         <td>Jory Sombrero Beige EL TIEMPO DE ENTREGA ES DE 12 A 20 DIAS HABILES, hay en todos colores y tamaños que se desee.
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 30.990</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store8.jpg"></td>
                         <td>
                             Servus Duke Iron - Botas De Trabajo Para Hombre (polipropile
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 60.800</td>
                     </tr>
                     <tr>
                         <td><img class="card-img-top " width="auto" src="assets/images/store9.jpg"></td>
                         <td>Traje Para Lluvia Stansport Comercial
-                            <br> <br> <br> <button class="btn btn-primary btn-sm" [routerLink]="['/login']">Comprar</button></td>
+                            <br> <br> <br> <button class="btn btn-primary btn-sm" (click) = "onAddCart()">Comprar</button></td>
                         <td>$ 110.990</td>
                     </tr>
 

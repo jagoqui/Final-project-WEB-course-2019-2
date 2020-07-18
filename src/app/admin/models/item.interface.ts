@@ -1,9 +1,8 @@
 import { Observable } from "rxjs";
-
 export type Categorys = 'Picnic' | 'Senderismo' | 'Granja';
 
 export interface Item {
-  id: string;
+  id?: string;
   photosURL: string[];
   name: string;
   description: string;

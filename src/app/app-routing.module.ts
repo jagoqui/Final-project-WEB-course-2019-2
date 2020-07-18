@@ -16,11 +16,12 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
   { path: 'verification-email', component: SendEmailComponent },
-  { path: 'profile', loadChildren: () => import('@admin/profile/profile.module').then((m) => m.ProfileModule), canActivate: [CanAdminGuard, CanSuscriptorGuard] },
+  { path: 'profile', loadChildren: () => import('@admin/profile/profile.module').then((m) => m.ProfileModule), canActivate: [CanSuscriptorGuard] },
   { path: 'forgot-password', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   { path: 'store-items', loadChildren: () => import('./admin/store-items/store-items.module').then(m => m.StoreItemsModule), canActivate: [CanAdminGuard] },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [CanAdminGuard] },
   { path: 'usersList', loadChildren: () => import('./admin/users-list/users-list.module').then(m => m.UsersListModule) },
+  { path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule), canActivate: [CanSuscriptorGuard] },
   { path: '**', loadChildren: () => import('@shared/Modules/page404/page404.module').then((m) => m.Page404Module) }
 ];
 
