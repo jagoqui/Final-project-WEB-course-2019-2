@@ -8,5 +8,5 @@ export interface User {
   password?: string;
   photoURL?: string;
   role?: Roles;
-  cartId?: string[];
+  cartsId?: string[];
 }

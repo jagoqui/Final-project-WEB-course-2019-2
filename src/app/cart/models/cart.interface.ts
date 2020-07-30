@@ -1,10 +1,11 @@
 export interface Cart {
   id?: string;
-  userId: string;
   itemsId: string[];
-  numItem: number;
+  numItems: number;
   totalPay: number;
   isPaid: boolean;
+  isBilled: boolean;
   dateCreate: Date;
+  dateLastUpdate: Date;
 }
 

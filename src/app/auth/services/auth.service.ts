@@ -1,5 +1,5 @@
 import { User } from '@shared/models/user.interface';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
@@ -10,9 +10,11 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { RoleValidator } from '@auth/helpers/roleValidator';
+import SwAlert from 'sweetalert2';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends RoleValidator {
+  public numCartsUser$ = new EventEmitter<number>(); //Evento que emite el número de carros del usuario
   private UsersCollection: AngularFirestoreCollection<User>; // Le paso los users que hay en Firenbase
   Users: Observable<User[]>; // Observo los user
   private UserDoc: AngularFirestoreDocument<User>; // Le paso los un user desde Firenbase
@@ -39,7 +41,7 @@ export class AuthService extends RoleValidator {
       this.updateUserData(user);
       return user;
     } catch (error) {
-      console.log("Error in login with Google :> ", error);
+      this.onError(error);
     }
   }
 
@@ -64,7 +66,7 @@ export class AuthService extends RoleValidator {
       this.updateUserData(user); //TODO: No siempre llamar acá , asinar role, primero
       return user;
     } catch (error) {
-      console.log(error);
+      this.onError(error);
     }
   }
 
@@ -77,7 +79,12 @@ export class AuthService extends RoleValidator {
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
-      console.log(error);
+      SwAlert.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: `<span>${error.message}</span>`
+      })
     }
   }
 
@@ -115,21 +122,31 @@ export class AuthService extends RoleValidator {
       );
   }
 
-  public updateUserData(user: User) {
+  public  updateUserData(userToUpdate: User) {
     const ADMIN1 = 'jaidiver.gomez@udea.edu.co';
-    const ADMIN2 = 'yenni.hernandez@udea.edu.co'
+    const ADMIN2 = 'yeni.hernandez@udea.edu.co'
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `Users_loguin/${user.uid}`
+      `Users_loguin/${userToUpdate.uid}`
     );
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      role: (user.email == ADMIN1 || user.email == ADMIN2) ? 'ADMIN' : 'SUSCRIPTOR',
-    };
-    return userRef.set(data, { merge: true });
+    this.getOneUser(userToUpdate.uid).subscribe(user =>{ //Se busca si existe el usuario en la base de datos
+      const data: User = { //No se utiliza directmante el metodo update de Firestore, porque hay que estar actualizando constantemente la información del usurio desde Google
+        uid: userToUpdate.uid,
+        email: userToUpdate.email,
+        displayName: userToUpdate.displayName? userToUpdate.displayName: null,
+        emailVerified: userToUpdate.emailVerified,
+        photoURL: userToUpdate.photoURL,
+        role: (userToUpdate.email == ADMIN1 || userToUpdate.email == ADMIN2) ? 'ADMIN' : 'SUSCRIPTOR',
+        cartsId:[]=[]
+      };
+      if(user){ //Si el usuario existe en la base de datos, entonces pasa a actulizar el campo 'cartsId' si es necesario
+        data.cartsId = userToUpdate.cartsId? userToUpdate.cartsId: user.cartsId;
+      }
+      try {
+        return userRef.set(data, { merge: true }); //Actuliza la data del usuario en el base de datos
+      } catch (error) { //Captura, si se preseta, un error con el upadate
+        this.onError(error);
+      }
+    });
   }
 
   async userDelete(user: User) { //TODO: Refactorizar
@@ -146,12 +163,21 @@ export class AuthService extends RoleValidator {
       // }
       return await this.UserDoc.delete();
     } catch (error) {
-      console.log("Error deleting item :> ", error);
+      this.onError(error);
     }
   }
 
   isAuth() {
     return this.afAuth.authState.pipe(map(auths => auths));
+  }
+
+  onError(error){
+    SwAlert.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: `<span>${error.message}</span>`
+    });
   }
 
 }

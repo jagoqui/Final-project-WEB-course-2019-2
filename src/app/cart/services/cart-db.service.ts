@@ -52,8 +52,7 @@ export class CartDbService {
 
   async addCart(newItem: Cart) {
     try {
-      const docRef =  await this.CartsCollection.add(newItem);
-      return docRef.id;
+      return await this.CartsCollection.add(newItem);
     } catch (error) {
       console.log("Error in add new cart :> ", error);
     }

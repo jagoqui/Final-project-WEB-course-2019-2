@@ -19,7 +19,12 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   imageSrc: String | ArrayBuffer | null;
   isOverDrop = false;
-  newUser: User;
+  newUser: User = {
+    uid: '',
+    email: '',
+    emailVerified: null,
+    photoURL: null,
+  };
   constructor(private authSvc: AuthService, private router: Router, private storageSvc: StorageService) { }
 
   createFormGroup() {
@@ -36,11 +41,11 @@ export class RegisterComponent implements OnInit {
     try {
       this.newUser = await this.authSvc.register(email, password);
       if (this.newUser) {
-        // this.storageSvc.uploadImage(this.profileImage, 'test');
-        // console.log(this.profileImage[0].get_downloadURL());
+        // this.storageSvc.uploadImage(this.profileImage, 'profileUsers');
+        // while(this.profileImage[0].uploading){}
         // this.profileImage[0].downloadURL.subscribe(url => this.newUser.photoURL = url);
         // this.authSvc.updateUserData(this.newUser); //Actualiza la información del usuario
-        this.checkUserIsVerified(this.newUser);
+        // this.checkUserIsVerified(this.newUser);
       } else {
         this.profileImage = []; //Elimina la imagen de perfil cargada
         this.imageSrc = null; //Le lleva nul al src del la imagen cargada, para que obligue al usuario volver a cargar una imagen

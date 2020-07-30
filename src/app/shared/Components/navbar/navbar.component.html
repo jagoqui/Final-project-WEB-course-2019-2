@@ -27,7 +27,11 @@
       <li class="nav-item" *ngIf="user">
         <a href="#" class="nav-link ml-2" (click)="onLogout()">Logout</a>
       </li>
-      <a [routerLink]= "['/cart']" class="text-danger"><i *ngIf="(cartBD.onCart$ | async) != null" class="fas fa-cart-plus fa-2x"></i>{{cartBD.onCart$ | async}}</a>
+      <a [routerLink]= "['/cart']" class="text-white" *ngIf="authSvc.numCartsUser$ | async as numCarts">
+        <span title="num carts">{{numCarts>1? numCarts: null}}</span>
+        <i class="fas fa-cart-plus fa-2x" title="Click to go to cart"></i>
+      </a>
+      <span *ngIf="cartBD.onCart$ | async as numItems" title="num added items">({{numItems}})</span>
     </ul>
 
     <ng-template #login>
