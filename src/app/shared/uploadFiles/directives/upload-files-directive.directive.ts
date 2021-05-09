@@ -1,7 +1,7 @@
 import {Directive, EventEmitter, HostListener, Input, Output} from '@angular/core';
-import {ImageValidator} from '@shared/uploadFiles/helpers/imageValidator';
-import {FileItem} from '@shared/uploadFiles/models/file-item.ts';
 import SwAlert from 'sweetalert2';
+import {ImageValidator} from '../helpers/ImageValidator';
+import {FileItem} from '../models/file-item';
 
 @Directive({
   selector: '[appUploadFilesDirective]'
