@@ -1,24 +1,19 @@
-import { User } from '@shared/models/user.interface';
-import { Injectable, EventEmitter } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
-import { RoleValidator } from '@auth/helpers/roleValidator';
+import {User} from '@shared/models/user.interface';
+import {EventEmitter, Injectable} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {auth} from 'firebase/app';
+import {Observable, of} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {RoleValidator} from '@auth/helpers/roleValidator';
 import SwAlert from 'sweetalert2';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService extends RoleValidator {
-  public numCartsUser$ = new EventEmitter<number>(); //Evento que emite el número de carros del usuario
-  private UsersCollection: AngularFirestoreCollection<User>; // Le paso los users que hay en Firenbase
-  Users: Observable<User[]>; // Observo los user
-  private UserDoc: AngularFirestoreDocument<User>; // Le paso los un user desde Firenbase
+  public numCartsUser$ = new EventEmitter<number>(); // Evento que emite el número de carros del usuario
   public user$: Observable<User>;
+  private UsersCollection: AngularFirestoreCollection<User>; // Le paso los users que hay en Firenbase
+  private UserDoc: AngularFirestoreDocument<User>; // Le paso los un user desde Firenbase
 
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     super();
@@ -35,7 +30,7 @@ export class AuthService extends RoleValidator {
 
   async loginGoogle(): Promise<User> {
     try {
-      const { user } = await this.afAuth.signInWithPopup(
+      const {user} = await this.afAuth.signInWithPopup(
         new auth.GoogleAuthProvider()
       );
       this.updateUserData(user);
@@ -59,11 +54,11 @@ export class AuthService extends RoleValidator {
 
   async login(email: string, password: string): Promise<User> {
     try {
-      const { user } = await this.afAuth.signInWithEmailAndPassword(
+      const {user} = await this.afAuth.signInWithEmailAndPassword(
         email,
         password
       );
-      this.updateUserData(user); //TODO: No siempre llamar acá , asinar role, primero
+      this.updateUserData(user); // TODO: No siempre llamar acá , asinar role, primero
       return user;
     } catch (error) {
       this.onError(error);
@@ -72,19 +67,19 @@ export class AuthService extends RoleValidator {
 
   async register(email: string, password: string): Promise<User> {
     try {
-      const { user } = await this.afAuth.createUserWithEmailAndPassword(
+      const {user} = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
-      SwAlert.fire({
+      await SwAlert.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Something went wrong!',
         footer: `<span>${error.message}</span>`
-      })
+      });
     }
   }
 
@@ -102,9 +97,9 @@ export class AuthService extends RoleValidator {
       if (action.payload.exists === false) {
         return null;
       } else {
-        const User = action.payload.data() as User;
-        User.uid = action.payload.id;
-        return User;
+        // const User = action.payload.data() as User;
+        // User.uid = action.payload.id;
+        return action.payload.data() as User;
       }
     }));
   }
@@ -116,40 +111,41 @@ export class AuthService extends RoleValidator {
           actions.map(a => {
             const data = a.payload.doc.data() as User;
             const id = a.payload.doc.id;
-            return { id, ...data };
+            return {id, ...data};
           })
         )
       );
   }
 
-  public  updateUserData(userToUpdate: User) {
+  public updateUserData(userToUpdate: User) {
     const ADMIN1 = 'jaidiver.gomez@udea.edu.co';
-    const ADMIN2 = 'yeni.hernandez@udea.edu.co'
+    const ADMIN2 = 'yeni.hernandez@udea.edu.co';
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `Users_loguin/${userToUpdate.uid}`
     );
-    this.getOneUser(userToUpdate.uid).subscribe(user =>{ //Se busca si existe el usuario en la base de datos
-      const data: User = { //No se utiliza directmante el metodo update de Firestore, porque hay que estar actualizando constantemente la información del usurio desde Google
+    this.getOneUser(userToUpdate.uid).subscribe(user => { // Se busca si existe el usuario en la base de datos
+      // tslint:disable-next-line:max-line-length
+      const data: User = { // No se utiliza directmante el metodo update de Firestore, porque hay que estar actualizando constantemente la información del usurio desde Google
         uid: userToUpdate.uid,
         email: userToUpdate.email,
-        displayName: userToUpdate.displayName? userToUpdate.displayName: null,
+        displayName: userToUpdate.displayName ? userToUpdate.displayName : null,
         emailVerified: userToUpdate.emailVerified,
         photoURL: userToUpdate.photoURL,
-        role: (userToUpdate.email == ADMIN1 || userToUpdate.email == ADMIN2) ? 'ADMIN' : 'SUSCRIPTOR',
-        cartsId:[]=[]
+        role: (userToUpdate.email === ADMIN1 || userToUpdate.email === ADMIN2) ? 'ADMIN' : 'SUSCRIPTOR',
+        cartsId: [] = []
       };
-      if(user){ //Si el usuario existe en la base de datos, entonces pasa a actulizar el campo 'cartsId' si es necesario
-        data.cartsId = userToUpdate.cartsId? userToUpdate.cartsId: user.cartsId;
+      if (user) { // Si el usuario existe en la base de datos, entonces pasa a actulizar el campo 'cartsId' si es necesario
+        data.cartsId = userToUpdate.cartsId ? userToUpdate.cartsId : user.cartsId;
       }
       try {
-        return userRef.set(data, { merge: true }); //Actuliza la data del usuario en el base de datos
-      } catch (error) { //Captura, si se preseta, un error con el upadate
+        return userRef.set(data, {merge: true}); // Actuliza la data del usuario en el base de datos
+      } catch (error) { // Captura, si se preseta, un error con el upadate
         this.onError(error);
       }
     });
   }
 
-  async userDelete(user: User) { //TODO: Refactorizar
+  async userDelete(user: User) { // TODO: Refactorizar
     this.UserDoc = this.afs.doc<User>(`Users_loguin/${user.uid}`);
     try {
       // if (user.password) {
@@ -171,13 +167,13 @@ export class AuthService extends RoleValidator {
     return this.afAuth.authState.pipe(map(auths => auths));
   }
 
-  onError(error){
+  onError(error) {
     SwAlert.fire({
       icon: 'error',
       title: 'Oops...',
       text: 'Something went wrong!',
       footer: `<span>${error.message}</span>`
-    });
+    }).then();
   }
 
 }

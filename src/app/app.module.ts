@@ -7,8 +7,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from '@shared/Components/navbar/navbar.component';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 
-import { AngularFireAuthModule } from '@angular/fire/auth'
-import { AngularFireModule } from '@angular/fire'
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 import { CanSuscriptorGuard } from '@app/auth/guards/can-suscriptor.guard';
@@ -21,7 +21,7 @@ import { MaterialModule } from '@app/material.module';
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent,SendEmailComponent //TODO: Revisar si es necesario importar aquí el SendEmailCompanent
+    AppComponent, NavbarComponent, SendEmailComponent // TODO: Revisar si es necesario importar aquí el SendEmailCompanent
   ],
   imports: [
     BrowserModule,

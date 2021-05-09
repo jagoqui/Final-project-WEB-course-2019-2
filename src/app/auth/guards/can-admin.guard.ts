@@ -24,7 +24,7 @@ export class CanAdminGuard implements CanActivate {
             footer: '<span>Access denied. Must have permission to manage data. <span>'
           }).then((result) => {
             this.route.navigate(['home/']);
-          })
+          });
         }
       })
     );

@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 export type Categorys = 'Picnic' | 'Senderismo' | 'Granja';
 
 export interface Item {
@@ -9,7 +9,7 @@ export interface Item {
   category?: Categorys;
   promotionalCode?: Observable<string>;
   discount?: Observable<number>;
-  available : boolean;
+  available: boolean;
   price: number;
   quantity: Observable<number>;
   createDate: Date;

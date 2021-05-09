@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -70,7 +70,7 @@ const MaterialLibs = [
   MatTooltipModule,
   MatTreeModule,
   MatCarouselModule,
-]
+];
 
 @NgModule({
   declarations: [],

@@ -17,33 +17,33 @@ export class ForgotPasswordComponent {
     try {
       const email = this.userEmail.value;
       await this.authSvc.resetPassword(email);
-      let timerInterval
+      let timerInterval;
       SwAlert.fire({
         title: 'Auto close alert!',
         html: 'I will close in <b></b> milliseconds.',
         timer: 2000,
         timerProgressBar: true,
         onBeforeOpen: () => {
-          SwAlert.showLoading()
+          SwAlert.showLoading();
           timerInterval = setInterval(() => {
-            const content = SwAlert.getContent()
+            const content = SwAlert.getContent();
             if (content) {
-              const b = content.querySelector('b')
+              const b = content.querySelector('b');
               if (b) {
-                b.textContent += SwAlert.getTimerLeft()
+                b.textContent += SwAlert.getTimerLeft();
               }
             }
-          }, 100)
+          }, 100);
         },
         onClose: () => {
-          clearInterval(timerInterval)
+          clearInterval(timerInterval);
         }
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === SwAlert.DismissReason.timer) {
-          console.log('I was closed by the timer')
+          console.log('I was closed by the timer');
         }
-      })
+      });
       this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);

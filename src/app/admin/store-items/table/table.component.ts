@@ -3,8 +3,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ItemsDBService } from '@admin/services/items-db.service'
-import { Item } from '@admin/models/item.interface'
+import { ItemsDBService } from '@admin/services/items-db.service';
+import { Item } from '@admin/models/item.interface';
 import SwAlert from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './../modal/modal.component';
@@ -62,7 +62,7 @@ export class TableComponent implements OnInit, AfterViewInit {
               showConfirmButton: false,
               timer: 1500
             }
-          )
+          );
         }).catch((error) => {
           SwAlert.fire('Error!', 'There was an error deleting this item', error);
         });

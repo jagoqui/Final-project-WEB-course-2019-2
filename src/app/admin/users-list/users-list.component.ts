@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth/services/auth.service';
-import { User } from '@shared/models/user.interface'
+import { User } from '@shared/models/user.interface';
 import { Observable } from 'rxjs';
 import SwAlert from 'sweetalert2';
 import { stringify } from '@angular/compiler/src/util';
@@ -35,7 +35,7 @@ export class UsersListComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             }
-          )
+          );
         }).catch((error) => {
           SwAlert.fire('Error!', 'There was an error deleting this item', error);
         });
@@ -43,7 +43,7 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  onUpdateUser(user:User){
+  onUpdateUser(user: User){
 
   }
 

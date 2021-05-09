@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Item } from '@admin/models/item.interface'
-import { FormGroup, Validators, FormControl, FormArray, Form } from '@angular/forms';
-import { StorageService } from '@shared/uploadFiles/services/storage.service';
-import { ItemsDBService } from '@admin/services/items-db.service';
-import { FileItem } from '@shared/uploadFiles/models/file-item';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Item} from '@admin/models/item.interface';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {StorageService} from '@shared/uploadFiles/services/storage.service';
+import {ItemsDBService} from '@admin/services/items-db.service';
+import {FileItem} from '@shared/uploadFiles/models/file-item';
 import SwAlert from 'sweetalert2';
-import { Observable,of } from 'rxjs';
 
 @Component({
   selector: 'app-add-item',
@@ -14,13 +13,12 @@ import { Observable,of } from 'rxjs';
   providers: [StorageService]
 })
 export class AddItemComponent implements OnInit {
-  @Input() itemUpdate: Item; //Recibe el item a editar
-  @Input() action: string; //Recibe la acción que debe hacer (Editar o agregar item)
+  @Input() itemUpdate: Item; // Recibe el item a editar
+  @Input() action: string; // Recibe la acción que debe hacer (Editar o agregar item)
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
   addItemForm: FormGroup;
-  descountPattern = '/^-?[0-100]\d*(\.\d+)?$/';
-  itemImages: FileItem[] = []; //Crea un objeto tipo FileItem para la imagens del item
-  imagesSrc: String[] = [];
+  itemImages: FileItem[] = []; // Crea un objeto tipo FileItem para la imagens del item
+  imagesSrc: string[] = [];
   isOverDrop = false;
   photosDownloadURL: any[] = [];
   uploadingFilesFinish = false;
@@ -35,14 +33,16 @@ export class AddItemComponent implements OnInit {
     price: 0,
     quantity: null,
     createDate: null,
-  }
+  };
 
-  constructor(private itemDB: ItemsDBService, private storageSvc: StorageService) { }
+  constructor(private itemDB: ItemsDBService, private storageSvc: StorageService) {
+  }
 
   createFormGroup() {
     return new FormGroup({
       name: new FormControl(this.itemUpdate ? this.itemUpdate.name : '', [Validators.required]),
       category: new FormControl(this.itemUpdate ? this.itemUpdate.category : '', [Validators.required]),
+      // tslint:disable-next-line:max-line-length
       promotionalCode: new FormControl(this.itemUpdate ? this.itemUpdate.promotionalCode : '', [Validators.minLength(10), Validators.maxLength(10)]),
       discount: new FormControl(this.itemUpdate ? this.itemUpdate.discount : '', [Validators.min(0), Validators.max(100)]),
       available: new FormControl(this.itemUpdate ? this.itemUpdate.available : '', [Validators.required]),
@@ -56,25 +56,25 @@ export class AddItemComponent implements OnInit {
 
   onAddItem() {
     try {
-      this.addItemForm.patchValue({'createDate': new Date(), 'photosURL' : this.photosDownloadURL})
+      this.addItemForm.patchValue({createDate: new Date(), photosURL: this.photosDownloadURL});
       console.log(this.addItemForm.value);
       this.item = this.addItemForm.value;
-      if (this.action == 'ADD') {
-        this.itemDB.addItem(this.item); //Agrega el item a la base de datos
+      if (this.action === 'ADD') {
+        this.itemDB.addItem(this.item).then(); // Agrega el item a la base de datos
         SwAlert.fire({
           icon: 'success',
           title: 'Your item has been added',
           showConfirmButton: false,
           timer: 1500
-        });
-      }else{
-        this.itemDB.updateItem(this.item); //Actuliza el item a la base de datos
+        }).then();
+      } else {
+        this.itemDB.updateItem(this.item).then(); // Actuliza el item a la base de datos
         SwAlert.fire({
           icon: 'success',
           title: 'Your item has been updated',
           showConfirmButton: false,
           timer: 1500
-        });
+        }).then();
       }
       this.closeModal.emit(true);
     } catch (error) {
@@ -83,25 +83,26 @@ export class AddItemComponent implements OnInit {
         title: 'Oops...',
         text: 'Something went wrong!',
         footer: 'Error uploading data of item'
-      })
+      }).then();
     }
   }
 
   getImagesURL(aux: any) {
-    if (!this.photosDownloadURL.includes(aux)) { //Comprueba si no se ha alamcenado la URL de la imagen
+    if (!this.photosDownloadURL.includes(aux)) { // Comprueba si no se ha alamcenado la URL de la imagen
       this.photosDownloadURL.push(aux);
     }
-    if (this.photosDownloadURL.length == this.imagesSrc.length) { //Detecta si ya se recuperan todas las URL de las imagenes subidas a Firebase
+    // tslint:disable-next-line:max-line-length
+    if (this.photosDownloadURL.length === this.imagesSrc.length) { // Detecta si ya se recuperan todas las URL de las imagenes subidas a Firebase
       this.uploadingFilesFinish = true;
     }
   }
 
-  deleteItemImage(pos: number, itemImages?: FileItem[]) { //Elimina un fichero del arreglo de ficheros
-    let auxFileItem: FileItem[] = [];
-    let auxImageSrc: any[] = [];
+  deleteItemImage(pos: number, itemImages?: FileItem[]) { // Elimina un fichero del arreglo de ficheros
+    const auxFileItem: FileItem[] = [];
+    const auxImageSrc: any[] = [];
     if (!itemImages) {
       for (let i = 0; i < this.itemImages.length; i++) {
-        if (i != pos) {
+        if (i !== pos) {
           auxFileItem.push(this.itemImages[i]);
           auxImageSrc.push(this.imagesSrc[i]);
         }
@@ -119,10 +120,9 @@ export class AddItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.addItemForm = this.createFormGroup();
-    if(this.itemUpdate){
+    if (this.itemUpdate) {
       // let aux$: Observable<string[]>;
-      let i = 0;
-      for(const url of this.itemUpdate.photosURL) {
+      for (const url of this.itemUpdate.photosURL) {
         this.imagesSrc.push(url);
         // aux$ = of(this.itemUpdate.photosURL)
         // this.itemImages.push();
@@ -130,10 +130,5 @@ export class AddItemComponent implements OnInit {
         // i++;
       }
     }
-  }
-
-  get_ImageName(image: FileItem, hide: number) {
-    if (!hide)
-      return image.name;
   }
 }

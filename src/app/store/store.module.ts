@@ -10,6 +10,6 @@ import { MaterialModule } from '@app/material.module';
 
 @NgModule({
   declarations: [StoreComponent],
-  imports: [CommonModule,StoreRoutingModule, ReactiveFormsModule, SharedModule, MaterialModule]
+  imports: [CommonModule, StoreRoutingModule, ReactiveFormsModule, SharedModule, MaterialModule]
 })
 export class StoreModule { }

@@ -28,10 +28,10 @@ export class NavbarComponent implements OnInit {
     try {
       this.user$ = this.authSvc.isAuth();
       this.user$.subscribe(currentUser => {
-        if(currentUser){
+        if (currentUser){
           this.authSvc.getOneUser(currentUser.uid).subscribe(user => {
-            let numCarts = user.cartsId.length;
-            if(numCarts){ //Si el usuario tiene al menos un carrito
+            const numCarts = user.cartsId.length;
+            if (numCarts){ // Si el usuario tiene al menos un carrito
               this.authSvc.numCartsUser$.emit(numCarts);
               this.cartBD.getOneCart(user.cartsId[user.cartsId.length - 1]).subscribe(cart => {
                 if (cart) {
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
         }
       });
     } catch (error) {
-      console.log('Error in login',error);
+      console.log('Error in login', error);
     }
   }
 }

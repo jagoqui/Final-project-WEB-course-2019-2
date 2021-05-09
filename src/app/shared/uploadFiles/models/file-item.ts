@@ -5,7 +5,7 @@ export class FileItem {
   public uploadPercent: Observable<number>;
   public downloadURL: Observable<string>;
 
-  constructor(public file: File = file) { //Le pasa como para
+  constructor(public file: File = file) { // Le pasa como para
     this.name = file.name;
   }
 }

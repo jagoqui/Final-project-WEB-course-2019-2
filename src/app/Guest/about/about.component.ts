@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -6,12 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
-  show :boolean= false;
-  textButton :string;
-  constructor() { }
-  visibility(){
-    this.show =! this.show;
+  show = false;
+
+  constructor() {
   }
+
+  visibility() {
+    this.show = !this.show;
+  }
+
   ngOnInit(): void {
   }
 
